@@ -1,0 +1,48 @@
+html,
+body,
+#__nuxt,
+#__layout,
+#content {
+  background: #fff;
+  font-family: Work Sans;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  outline: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+input {
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.h-line {
+  width: 100%;
+  height: 1px;
+  background: #e8e8e8;
+}

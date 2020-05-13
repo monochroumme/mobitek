@@ -1,0 +1,20 @@
+{
+  "name": "mobitek",
+  "version": "1.0.0",
+  "description": "Mobitek.az on Nuxt.js",
+  "author": "mono",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2"
+  }
+}
