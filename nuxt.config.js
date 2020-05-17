@@ -12,6 +12,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      // Work Sans font
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' }
     ]
   },
@@ -30,6 +31,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/swiper',
+    '~/plugins/bus'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -40,6 +43,23 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+    [
+      'nuxt-i18n',
+      {
+        noPrefixDefaultLocale: true,
+        locales: [
+            {code: 'en', iso: 'en-US', file: 'en.json'},
+            {code: 'az', iso: 'az-AZ', file: 'az.json'},
+            {code: 'ru', iso: 'ru-RU', file: 'ru.json'}
+        ],
+        defaultLocale: 'en',
+        vueI18n: {
+          fallbackLocale: 'en'
+        },
+        lazy: true,
+        langDir: 'locales/'
+      }
+    ]
   ],
   /*
   ** Build configuration

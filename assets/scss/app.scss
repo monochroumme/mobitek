@@ -1,3 +1,8 @@
-@import "fonts.scss";
-@import "common.scss";
-@import "coming.scss";
+@import "global/colors.scss";
+@import "global/fonts.scss";
+@import "global/common.scss";
+
+@import "global/header.scss";
+@import "global/footer.scss";
+
+@import "pages/index.scss";

@@ -1,0 +1,30 @@
+{
+	"header": {
+		"home": "Home",
+		"catalog": "Catalog",
+		"about": "About us",
+		"contacts": "Contacts"
+	},
+
+	"index": {
+		"product-showcase": {
+			"charger": "Charger",
+			"car": "Car",
+			"audio": "Audio",
+			"protectors-cases": "Protectors & Cases",
+			"usb": "USB Cables",
+			"home": "Home Appliance",
+			"game": "Game"
+		},
+
+		"product-slider": {
+			"see-more": "See More"
+		},
+
+		"banners": {
+			"how": "How does fast charging work?",
+			"apple": "Apple Lightning USB cable buy now Baku",
+			"smart": "Smart Home"
+		}
+	}
+}

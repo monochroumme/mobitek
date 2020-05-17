@@ -1,9 +1,13 @@
+html {
+  overflow-x: hidden;
+}
+
 html,
 body,
 #__nuxt,
 #__layout,
 #content {
-  background: #fff;
+  background: #EDEDED;
   font-family: Work Sans;
   width: 100%;
   height: 100%;
@@ -22,6 +26,13 @@ input {
   &::-ms-clear {
     display: none;
   }
+}
+
+button {
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
 }
 
 *,
@@ -45,4 +56,16 @@ input {
   width: 100%;
   height: 1px;
   background: #e8e8e8;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1440px;
+  width: 100%;
+
+  &--page {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
 }
