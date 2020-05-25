@@ -1,5 +1,5 @@
 <template>
-	<header class="header" :class="{ 'header--floating': isHomePage }">
+	<header class="header" :class="{ 'header--floating': floatPage, 'header--white': whitePage }">
 		<div class="header__content__wrapper">
 			<div class="header__content container container--header">
 				<div class="header__left">
@@ -26,12 +26,12 @@
 				<div class="header__right">
 					<div class="header__search">
 						<button class="header__search__button">
-							<img alt="Search" src="~/static/pics/svg/header/search.svg">
+							<img alt="Search" src="/pics/img/header/search.png">
 						</button>
 					</div>
 					<div class="header__langs">
 						<button class="header__langs__button">
-							<img alt="Languages" src="~/static/pics/svg/header/langs.svg">
+							<img alt="Languages" src="/pics/img/header/langs.png">
 						</button>
 					</div>
 				</div>
@@ -43,8 +43,12 @@
 <script>
 export default {
 	computed: {
-		isHomePage() {
-			return this.$route.path == '/';
+		floatPage() {
+			return this.$route.path.toLowerCase() == '/';
+		},
+
+		whitePage() {
+		 // return this.$route.path.toLowerCase() == '/about';
 		}
 	}
 }

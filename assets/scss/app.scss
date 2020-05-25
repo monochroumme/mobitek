@@ -1,8 +1,12 @@
-@import "global/colors.scss";
-@import "global/fonts.scss";
-@import "global/common.scss";
+@import "global/colors";
+@import "global/fonts";
+@import "global/common";
 
-@import "global/header.scss";
-@import "global/footer.scss";
+@import "global/header";
+@import "global/footer";
+@import "global/store-card";
 
-@import "pages/index.scss";
+@import "pages/index";
+@import "pages/catalog";
+@import "pages/about";
+@import "pages/contacts";

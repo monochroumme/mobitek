@@ -36,7 +36,9 @@ export default {
 			productSwiperOption: {
 				slidesPerView: 4,
 				spaceBetween: 25,
-				loop: true
+				loop: true,
+				observer: true,
+				observeParents: true
 			}
 		}
 	},

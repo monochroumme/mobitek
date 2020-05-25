@@ -2,13 +2,9 @@ html {
   overflow-x: hidden;
 }
 
-html,
-body,
-#__nuxt,
-#__layout,
-#content {
+body, {
   background: #EDEDED;
-  font-family: Work Sans;
+  font-family: Roboto;
   width: 100%;
   height: 100%;
 }
@@ -67,5 +63,27 @@ button {
   &--page {
     padding-left: 80px;
     padding-right: 80px;
+  }
+}
+
+.page-title {
+  @include flex-center;
+  margin-top: 25px;
+  margin-bottom: 45px;
+
+  h1 {
+    margin-bottom: 0;
+    font-weight: normal;
+    font-size: 35px;
+    line-height: 58px;
+    text-align: center;
+    color: #000000;
+    margin: 0 32px;
+  }
+
+  .line {
+    width: 73px;
+    height: 3px;
+    background: #333333;
   }
 }

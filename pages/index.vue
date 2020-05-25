@@ -5,6 +5,7 @@
     <ProductSlider :data="products" />
     <Banners />
     <VideoSlider />
+    <BottomFeatures />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import ProductShowcase from '~/components/pages/index/ProductShowcase';
 import ProductSlider from '~/components/pages/index/ProductSlider';
 import Banners from '~/components/pages/index/Banners';
 import VideoSlider from '~/components/pages/index/VideoSlider';
+import BottomFeatures from '~/components/pages/index/BottomFeatures';
 
 export default {
   components: {
@@ -21,7 +23,8 @@ export default {
     ProductShowcase,
     ProductSlider,
     Banners,
-    VideoSlider
+    VideoSlider,
+    BottomFeatures
   },
 
   data() {

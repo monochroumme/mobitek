@@ -42,7 +42,9 @@ export default {
     return {
       sectionSwiperOption: {
         spaceBetween: 10,
-        allowTouchMove: false
+        allowTouchMove: false,
+        observer: true,
+        observeParents: true
       },
 
       currentSlider: 1
