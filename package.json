@@ -4,6 +4,9 @@
   "description": "Mobitek.az on Nuxt.js",
   "author": "mono",
   "private": true,
+  "engines": {
+    "node": "13.12.x"
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
