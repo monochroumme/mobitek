@@ -25,9 +25,16 @@
 				</nav>
 				<div class="header__right">
 					<div class="header__search">
-						<button class="header__search__button">
+						<button class="header__search__button" @click="showSearchBar = !showSearchBar">
 							<img alt="Search" src="/pics/img/header/search.png">
 						</button>
+						<div class="header__search__outer" v-show="showSearchBar">
+							<div class="header__search__inner" :style="{active: showSearchBar}">
+								<div class="header__search__wrapper">
+									<input type="text" name="search">
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="header__langs">
 						<button class="header__langs__button">
@@ -42,6 +49,12 @@
 
 <script>
 export default {
+	data() {
+		return {
+			showSearchBar: false
+		}
+	},
+
 	computed: {
 		floatPage() {
 			return this.$route.path.toLowerCase() == '/';

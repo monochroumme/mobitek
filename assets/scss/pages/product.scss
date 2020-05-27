@@ -1,0 +1,17 @@
+.product-page {
+	&__product-slider {
+		&__content {
+			position: relative;
+			padding: 0 80px;
+
+			.swiper-container {
+				padding: 10px 0;
+			}
+
+			.swiper-slide {
+				display: flex;
+				height: unset;
+			}
+		}
+	}
+}

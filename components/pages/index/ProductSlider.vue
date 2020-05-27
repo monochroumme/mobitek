@@ -1,11 +1,11 @@
 <template>
-  <div class="index-page__product-slider container container--page">
-    <div class="index-page__product-slider__top">
+  <div class="index-page__product-slider">
+    <div class="index-page__product-slider__top container container--page">
       <div class="index-page__product-slider__top__item" v-for="(item, i) in data" :key="i" @click="showSection(i)" :class="{ active: currentSlider == i }">
         <span>{{ item.title }}</span>
       </div>
     </div>
-    <div class="index-page__product-slider__middle">
+    <div class="index-page__product-slider__middle container container--page">
       <div v-swiper:sectionSwiper="sectionSwiperOption">
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for="(section, i) in data" :key="i">
@@ -14,13 +14,15 @@
         </div>
       </div>
       <button class="index-page__product-slider__arrow-left" @click="slidePrevProduct()">
-        <img src="~/static/pics/svg/index/slider-arrow-right.svg" alt="Go left">
+        <img class="half" src="~/static/pics/svg/index/slider-arrow-right.svg" alt="Go left">
+        <img class="full" src="~/static/pics/svg/slider-round-arrow-right.svg" alt="Go left">
       </button>
       <button class="index-page__product-slider__arrow-right" @click="slideNextProduct()">
-        <img src="~/static/pics/svg/index/slider-arrow-right.svg" alt="Go right">
+        <img class="half" src="~/static/pics/svg/index/slider-arrow-right.svg" alt="Go right">
+        <img class="full" src="~/static/pics/svg/slider-round-arrow-right.svg" alt="Go right">
       </button>
     </div>
-    <div class="index-page__product-slider__bottom">
+    <div class="index-page__product-slider__bottom container container--page">
       <nuxt-link to="/catalog">
         <span>{{ $t('index.product-slider.see-more') }}</span>
       </nuxt-link>

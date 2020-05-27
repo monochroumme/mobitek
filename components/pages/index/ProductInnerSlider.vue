@@ -3,9 +3,9 @@
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" v-for="(product, i) in data.products" :key="i">
 				<div class="index-page__product-slider__card">
-					<nuxt-link :to="product.link">
+					<nuxt-link :to="product.link" class="index-page__product-slider__card__inner">
 						<div class="editors-choice" v-show="product.editorsChoice">
-							<img src="~/static/pics/svg/index/editor.svg" alt="Editor's choice">
+							<img src="/pics/img/editors-choice.png" alt="Editor's choice">
 						</div>
 						<div class="pic">
 							<img :src="product.pic" :alt="product.title">
@@ -20,6 +20,7 @@
 							<div class="title">{{ product.title }}</div>
 							<div class="description">{{ product.description }}</div>
 						</div>
+						<div class="price">{{ product.price }} azn</div>
 					</nuxt-link>
 				</div>
 			</div>
