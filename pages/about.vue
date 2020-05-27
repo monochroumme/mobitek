@@ -18,17 +18,24 @@
 		<div class="about-page__certificates">
 			<PageTitle :title="$t('about.certificates')" />
 			<div class="about-page__certificates__inner">
-				<div class="about-page__certificates__item">
-					<a href="/"><img src="/pics/img/about/c1.png" alt="Devia Accessories Authorization Certificate"></a>
+				<div class="about-page__certificates__item" @click="showCertificate(1)">
+					<img src="/pics/img/about/c1.png" alt="Devia Accessories Authorization Certificate">
+					<button class="about-page__certificates__show"><span>Show</span></button>
 				</div>
-				<div class="about-page__certificates__item">
-					<a href="/"><img src="/pics/img/about/c2.png" alt="Joyroom Authorization Certificate"></a>
+				<div class="about-page__certificates__item" @click="showCertificate(2)">
+					<img src="/pics/img/about/c2.png" alt="Joyroom Authorization Certificate">
+					<button class="about-page__certificates__show"><span>Show</span></button>
 				</div>
-				<div class="about-page__certificates__item">
-					<a href="/"><img src="/pics/img/about/c3.png" alt="Rock Accessories Authorization Certificate"></a>
+				<div class="about-page__certificates__item" @click="showCertificate(3)">
+					<img src="/pics/img/about/c3.png" alt="Rock Accessories Authorization Certificate">
+					<button class="about-page__certificates__show"><span>Show</span></button>
 				</div>
 			</div>
-			<a href="/" class="about-page__certificates__show">Show</a>
+		</div>
+		<div class="about-page__certificates__modal" v-show="certificateShown > 0" @click="showCertificate(-1)">
+			<img src="/pics/img/about/c1.jpg" alt="Devia Accessories Authorization Certificate" v-show="certificateShown == 1">
+			<img src="/pics/img/about/c2.jpg" alt="Joyroom Authorization Certificate" v-show="certificateShown == 2">
+			<img src="/pics/img/about/c3.jpg" alt="Rock Accessories Authorization Certificate" v-show="certificateShown == 3">
 		</div>
 	</div>	
 </template>
@@ -39,6 +46,18 @@ import PageTitle from '~/components/global/PageTitle';
 export default {
 	components: {
 		PageTitle
+	},
+
+	data() {
+		return {
+			certificateShown: -1
+		}
+	},
+
+	methods: {
+		showCertificate(i) {
+			this.certificateShown = i;
+		}
 	}
 }	
 </script>

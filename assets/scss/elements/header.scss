@@ -8,7 +8,9 @@
 	&--floating {
 		height: 0;
 		margin-bottom: 0;
+	}
 
+	&--transparent {
 		.header__content__wrapper {
 			background: rgba(49, 51, 50, 0.55);
 		}
