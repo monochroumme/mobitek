@@ -2,12 +2,14 @@
 @import "global/fonts";
 @import "global/common";
 
-@import "global/header";
-@import "global/footer";
-@import "global/store-card";
-@import "global/pagination";
+@import "elements/header";
+@import "elements/footer";
+@import "elements/store-card";
+@import "elements/pagination";
+@import "elements/dropdown-filter";
 
 @import "pages/index";
 @import "pages/catalog";
 @import "pages/about";
 @import "pages/contacts";
+@import "pages/product";

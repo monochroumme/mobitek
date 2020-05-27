@@ -52,14 +52,14 @@
 				</aside>
 				<main class="catalog-page__content">
 					<div class="catalog-page__top-filters">
-						<CatalogDropdownFilter v-model="filterByPrice" :options="filtersByPrice" />
-						<CatalogDropdownFilter v-model="filterByPrice" :options="filtersByProductNewness" />
+						<DropdownFilter v-model="filterByPrice" :options="filtersByPrice" />
+						<DropdownFilter v-model="filterByProductNewness" :options="filtersByProductNewness" />
 					</div>
 					<div class="catalog-page__products">
-						<div class="index-page__product-slider__card" v-for="(product,i) in products" :key="i">
-							<nuxt-link :to="product.link">
+						<div class="index-page__product-slider__card" v-for="(product,i) in products.slice((page-1)*perPage, Math.min(page*perPage, products.length))" :key="i">
+							<nuxt-link :to="product.link" class="index-page__product-slider__card__inner">
 								<div class="editors-choice" v-show="product.editorsChoice">
-									<img src="~/static/pics/svg/index/editor.svg" alt="Editor's choice">
+									<img src="/pics/img/editors-choice.png" alt="Editor's choice">
 								</div>
 								<div class="pic">
 									<img :src="product.pic" :alt="product.title">
@@ -78,7 +78,7 @@
 							</nuxt-link>
 						</div>
 					</div>
-					<Pagination v-model="curPage" :perPage="3" :totalElems="4" :emptyText="$t('catalog.empty')" />
+					<Pagination v-model="page" :perPage="perPage" :totalElems="4" :emptyText="$t('catalog.empty')" />
 				</main>
 			</div>
 		</div>
@@ -88,14 +88,14 @@
 <script>
 import ProductShowcase from '~/components/pages/index/ProductShowcase';
 import CatalogSearch from '~/components/pages/catalog/CatalogSearch';
-import CatalogDropdownFilter from '~/components/pages/catalog/CatalogDropdownFilter';
+import DropdownFilter from '~/components/global/DropdownFilter';
 import Pagination from '~/components/global/Pagination';
 
 export default {
 	components: {
 		ProductShowcase,
 		CatalogSearch,
-		CatalogDropdownFilter,
+		DropdownFilter,
 		Pagination
 	},
 
@@ -109,7 +109,8 @@ export default {
 			filterByPrice: 'ascending',
 			filterByProductNewness: 'new',
 
-			curPage: 1,
+			page: 1,
+			perPage: 3,
 
 			filtersByPrice: [
 				'ascending',

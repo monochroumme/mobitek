@@ -101,6 +101,39 @@
 
 	&__search {
 		margin-right: 40px;
+		position: relative;
+
+		&__button {
+			z-index: 1;
+			position: relative;
+		}
+
+		&__outer {
+			position: absolute;
+			top: -5px;
+			right: -13px;
+		}
+
+		&__inner {
+
+		}
+
+		&__wrapper {
+			background: white;
+			border-radius: 10px;
+			width: 300px;
+			height: 37px;
+
+			padding: 5px 50px 5px 13px;
+			@include flex-center;
+
+			input {
+				width: 100%;
+				font-size: 16px;
+				border: none;
+				outline: none;
+			}
+		}
 	}
 
 	&__search, &__langs {

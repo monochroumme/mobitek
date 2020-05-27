@@ -17,7 +17,8 @@
     "nuxt": "^2.0.0",
     "nuxt-i18n": "^6.11.1",
     "swiper": "^5.3.8",
-    "vue-awesome-swiper": "^4.1.1"
+    "vue-awesome-swiper": "^4.1.1",
+    "vue-click-outside": "^1.1.0"
   },
   "devDependencies": {
     "node-sass": "^4.14.1",

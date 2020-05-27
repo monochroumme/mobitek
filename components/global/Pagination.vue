@@ -2,8 +2,8 @@
   <div class="pagination">
     <div class="pagination__content" v-if="totalElems > perPage">
       <button class="pagination__button-left" @click="changePage(value-1)" :disabled="value == 1">
-        <img alt="Назад" v-show="value == 1" data-src="~/static/svg/pagination-right-inactive.svg" style="transform: scaleX(-1);" v-lazy-load>
-        <img alt="Назад" v-show="value > 1" data-src="~/static/svg/pagination-right-inactive.svg" style="transform: scaleX(-1);" v-lazy-load>
+        <img alt="Prev" v-show="value == 1" src="/pics/img/pagination-arrow-right.png" style="transform: scaleX(-1);">
+        <img alt="Prev" v-show="value > 1" src="/pics/img/pagination-arrow-right.png" style="transform: scaleX(-1);">
       </button>
       <button class="pagination__button" @click="changePage(1)" :class="{ 'current': value == 1 }" :disabled="value == 1">
         <span>1</span>
@@ -15,8 +15,8 @@
         <span>{{ lastPage }}</span>
       </button>
       <button class="pagination__button-right" @click="changePage(value+1)" :disabled="value == lastPage">
-        <img alt="Вперед" v-show="value == lastPage" data-src="~/static/svg/pagination-right-inactive.svg" v-lazy-load>
-        <img alt="Вперед" v-show="value < lastPage" data-src="~/static/svg/pagination-right-inactive.svg" v-lazy-load>
+        <img alt="Next" v-show="value == lastPage" src="/pics/img/pagination-arrow-right.png">
+        <img alt="Next" v-show="value < lastPage" src="/pics/img/pagination-arrow-right.png">
       </button>
     </div>
     <div v-if="totalElems == 0">
@@ -64,7 +64,6 @@ export default {
       if (p > 0 && p < this.lastPage + 1) {
         this.$emit('input', p);
         this.$bus.$emit('pageChanged', p);
-        document.querySelector('.vue-back-to-top').click();
       }
     },
 
