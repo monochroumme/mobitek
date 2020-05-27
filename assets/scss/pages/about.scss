@@ -107,6 +107,25 @@
 			margin-bottom: 15px;
 		}
 
+		&__modal {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,.5);
+			@include flex-center;
+			z-index: 12000;
+
+			img {
+				max-width: 100vw;
+				max-height: 100vh;
+				width: 50%;
+				min-width: 300px;
+				object-fit: contain;
+			}
+		}
+
 		&__inner {
 			display: flex;
 			margin-bottom: 5px;
@@ -118,10 +137,23 @@
 		}
 
 		&__item {
+			display: flex;
+			flex-direction: column;
 			margin-right: 50px;
+			cursor: pointer;
 
 			&:last-of-type {
 				margin-right: 0;
+			}
+
+			&:hover {
+				.about-page__certificates__show span {
+					display: block;
+				}
+			}
+
+			img {
+				margin-bottom: 5px;
 			}
 		}
 
@@ -131,6 +163,11 @@
 			line-height: 27px;
 			text-align: center;
 			color: #333333;
+			height: 27px;
+			
+			span {
+				display: none;
+			}
 		}
 	}
 }

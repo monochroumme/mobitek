@@ -1,5 +1,5 @@
 <template>
-	<header class="header" :class="{ 'header--floating': floatPage, 'header--white': whitePage }">
+	<header class="header" :class="{ 'header--floating': floatPage, 'header--white': whitePage, 'header--transparent': floatPage && transparent }">
 		<div class="header__content__wrapper">
 			<div class="header__content container container--header">
 				<div class="header__left">
@@ -51,8 +51,14 @@
 export default {
 	data() {
 		return {
-			showSearchBar: false
+			showSearchBar: false,
+			transparent: false
 		}
+	},
+
+	mounted() {
+		window.addEventListener('scroll', this.onScroll, false);
+		this.onScroll();
 	},
 
 	computed: {
@@ -63,6 +69,21 @@ export default {
 		whitePage() {
 		 // return this.$route.path.toLowerCase() == '/about';
 		}
+	},
+
+	methods: {
+		onScroll() {
+			if (document.querySelector('index-page')) {
+        return;
+      }
+
+      let scrollTop = window.scrollY || document.body.scrollTop || document.documentElement.scrollTop;
+      if (scrollTop > window.innerHeight) {
+      	this.transparent = false;
+      } else {
+      	this.transparent = true;
+      }
+    }
 	}
 }
 </script>
