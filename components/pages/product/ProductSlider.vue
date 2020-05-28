@@ -1,6 +1,9 @@
 <template>
 	<div class="product-page__product-slider">
 		<div class="product-page__product-slider__content container">
+			<h3 class="product-page__product-slider__title">{{ $t('product.also-buy') }}</h3>
+		</div>
+		<div class="product-page__product-slider__content container">
 			<div v-swiper:mySwiper="mySwiperOptions">
 	      <div class="swiper-wrapper">
 	        <div class="swiper-slide" v-for="(product, i) in data" :key="i">

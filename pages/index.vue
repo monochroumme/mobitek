@@ -54,7 +54,7 @@ export default {
               description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
               rating: 5,
               pic: 'pics/img/index/p1.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45
             },
             {
@@ -63,7 +63,7 @@ export default {
               description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
               rating: 5,
               pic: 'pics/img/index/p2.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45
             },
             {
@@ -72,7 +72,7 @@ export default {
               description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
               rating: 5,
               pic: 'pics/img/index/p3.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45,
               editorsChoice: true
             },
@@ -82,7 +82,7 @@ export default {
               description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
               rating: 5,
               pic: 'pics/img/index/p4.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45
             }
           ]
@@ -96,7 +96,7 @@ export default {
               description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
               rating: 5,
               pic: 'pics/img/index/p1.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45
             },
             {
@@ -105,7 +105,7 @@ export default {
               description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
               rating: 3,
               pic: 'pics/img/index/p2.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45
             },
             {
@@ -114,7 +114,7 @@ export default {
               description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
               rating: 2,
               pic: 'pics/img/index/p3.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45,
               editorsChoice: true
             },
@@ -124,7 +124,7 @@ export default {
               description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
               rating: 4,
               pic: 'pics/img/index/p4.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45
             }
           ]
@@ -138,7 +138,7 @@ export default {
               description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
               rating: 5,
               pic: 'pics/img/index/p1.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45,
               editorsChoice: true
             },
@@ -148,7 +148,7 @@ export default {
               description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
               rating: 5,
               pic: 'pics/img/index/p2.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45,
               editorsChoice: true
             },
@@ -158,7 +158,7 @@ export default {
               description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
               rating: 5,
               pic: 'pics/img/index/p3.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45,
               editorsChoice: true
             },
@@ -168,7 +168,7 @@ export default {
               description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
               rating: 5,
               pic: 'pics/img/index/p4.png',
-              link: '/products/xz',
+              link: '/product/xz',
               price: 45,
               editorsChoice: true
             }
