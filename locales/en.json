@@ -89,5 +89,18 @@
 		"connector": "Connector",
 		"price": "Price",
 		"empty": "No results"
+	},
+
+	"product": {
+		"fast-order": "Fast order",
+		"properties": "Product properties",
+		"enter-name": "Enter Your Name",
+		"enter-surname": "Enter Your Surname",
+		"enter-phone": "Enter Your Phone Number",
+		"enter-email": "Enter Your Email",
+		"enter-address": "Enter Your Address",
+		"add-to-cart": "ADD TO CART",
+		"buy-now": "BUY NOW",
+		"also-buy": "You can also buy"
 	}
 }

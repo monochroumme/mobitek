@@ -8,18 +8,7 @@
 				<aside class="catalog-page__filter">
 					<div class="catalog-page__filter__inner">
 						<h2 class="catalog-page__filter__section-title">{{ $t('catalog.color') }}</h2>
-						<div class="catalog-page__filter__colors">
-							<div class="catalog-page__filter__colors__item__wrapper" v-for="(item,i) in colors" :key="i">
-								<div class="catalog-page__filter__colors__item" @click="item.chosen = !item.chosen" :class="{
-									red: item.color == 'red',
-									yellow: item .color== 'yellow',
-									purple: item.color == 'purple',
-									black: item .color== 'black',
-									gray: item.color == 'gray',
-									active: item.chosen
-								}"></div>
-							</div>
-						</div>
+						<ColorChooser v-model="colors" />
 						<h2 class="catalog-page__filter__section-title">{{ $t('catalog.brand') }}</h2>
 						<div class="catalog-page__filter__brands">
 							<div class="catalog-page__filter__choosable catalog-page__filter__brands__item" v-for="(brand,i) in brands" :key="i" @click="brand.chosen = !brand.chosen" :class="{ active: brand.chosen }">{{ brand.title }}</div>
@@ -90,13 +79,15 @@ import ProductShowcase from '~/components/pages/index/ProductShowcase';
 import CatalogSearch from '~/components/pages/catalog/CatalogSearch';
 import DropdownFilter from '~/components/global/DropdownFilter';
 import Pagination from '~/components/global/Pagination';
+import ColorChooser from '~/components/global/ColorChooser';
 
 export default {
 	components: {
 		ProductShowcase,
 		CatalogSearch,
 		DropdownFilter,
-		Pagination
+		Pagination,
+		ColorChooser
 	},
 
 	data() {
@@ -206,7 +197,7 @@ export default {
           description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
           rating: 5,
           pic: 'pics/img/index/p1.png',
-          link: '/products/xz',
+          link: '/product/xz',
           price: 45
         },
         {
@@ -215,7 +206,7 @@ export default {
           description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
           rating: 5,
           pic: 'pics/img/index/p2.png',
-          link: '/products/xz',
+          link: '/product/xz',
           price: 45
         },
         {
@@ -224,7 +215,7 @@ export default {
           description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
           rating: 5,
           pic: 'pics/img/index/p3.png',
-          link: '/products/xz',
+          link: '/product/xz',
           editorsChoice: true,
           price: 45
         },
@@ -234,7 +225,7 @@ export default {
           description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
           rating: 5,
           pic: 'pics/img/index/p4.png',
-          link: '/products/xz',
+          link: '/product/xz',
           price: 45
         }
 			],
