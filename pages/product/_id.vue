@@ -7,7 +7,7 @@
           <div class="product-page__sliders__left">
             <div v-swiper:leftSwiper="leftSwiperOption">
               <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(pic, i) in product.pics" :key="i">
+                <div class="swiper-slide" v-for="(pic, i) in product.pics" :key="i" @click="rightSwiper.slideTo(i)">
                   <img :src="pic">
                 </div>
               </div>
@@ -96,6 +96,10 @@ export default {
 	},
 
   mounted() {
+    this.rightSwiper.on('slideChange', () => {
+      this.leftSwiper.slideTo(this.rightSwiper.activeIndex);
+    });
+
     this.leftSwiper.init(this.leftSwiperOption);
     this.rightSwiper.init(this.rightSwiperOption);
 
