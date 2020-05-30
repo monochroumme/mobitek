@@ -1,3 +1,118 @@
 {
-	
+	"header": {
+		"home": "Главная",
+		"catalog": "Каталог",
+		"about": "О нас",
+		"contacts": "Контакты"
+	},
+
+	"footer": {
+		"home": "Information",
+		"information": "Home",
+		"catalog": "Catalog",
+		"about-us": "About us",
+		"contacts-us": "Contact us",
+		"to-clients": "To clients",
+		"delivery-rules": "Delivery rules",
+		"our-promotions": "Our promotions",
+		"bonuses": "Bonuses",
+		"follow-us": "Follow us",
+		"contact-us": "Contact us",
+		"contacts": "Contacts",
+		"phone": "Phone",
+		"office": "Office",
+		"mail": "Mail",
+		"stay-connected": {
+			"title": "STAY CONNECTED",
+			"text": "Enter your E-mail Adress to receive NEWS about our new products",
+			"send": "Send"
+		}
+	},
+
+	"index": {
+		"product-showcase": {
+			"charger": "Charger",
+			"car": "Car",
+			"audio": "Audio",
+			"protectors-cases": "Protectors & Cases",
+			"usb": "USB Cables",
+			"home": "Home Appliance",
+			"game": "Game"
+		},
+
+		"product-slider": {
+			"see-more": "See More"
+		},
+
+		"banners": {
+			"how": {
+				"alt": "How does fast charging work?",
+				"title": "HOW DOES FAST CHARGING WORK?",
+				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+			},
+			"apple": {
+				"alt": "Apple Lightning USB cable buy now Baku",
+				"title": "HOW DOES FAST CHARGING WORK?",
+				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+			},
+			"smart": {
+				"alt": "Smart Home",
+				"title": "HOW DOES FAST CHARGING WORK?",
+				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+			}
+		},
+
+		"bottom-features": {
+			"fast-delivery": "Fast delivery",
+			"high-quality": "High quallity",
+			"instant-reply": "Instantly reply"
+		}
+	},
+
+	"contacts": {
+		"title": "Contacts",
+		"locations": "Our locations on the map",
+		"card": {
+			"details": "Shop Details :",
+			"see-address": "See address on the map"
+		}
+	},
+
+	"shops": {
+		"mall": "Shop Af Mall",
+		"caspian": "Shop Caspian",
+		"mark-1": "Shop Mark 1",
+		"duty": "Shop Duty",
+		"head": "Head Office"
+	},
+
+	"about": {
+		"title": "About Us",
+		"certificates": "Our Certificates"
+	},
+
+	"catalog": {
+		"search-for-products": "Search for products",
+		"enter-product-name": "Enter product name",
+		"search": "Search",
+		"example": "Example: headphones, case, baseus, etc.",
+		"color": "Color",
+		"brand": "Brand",
+		"connector": "Connector",
+		"price": "Price",
+		"empty": "No results"
+	},
+
+	"product": {
+		"fast-order": "Fast order",
+		"properties": "Product properties",
+		"enter-name": "Enter Your Name",
+		"enter-surname": "Enter Your Surname",
+		"enter-phone": "Enter Your Phone Number",
+		"enter-email": "Enter Your Email",
+		"enter-address": "Enter Your Address",
+		"add-to-cart": "ADD TO CART",
+		"buy-now": "BUY NOW",
+		"also-buy": "You can also buy"
+	}
 }
