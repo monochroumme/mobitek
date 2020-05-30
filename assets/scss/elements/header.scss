@@ -88,7 +88,7 @@
 				    transform: translateZ(0) scale(1.0, 1.0);
 				    font-smoothing: antialiased;
 
-					&:hover, &.nuxt-link-exact-active {
+					&:hover, &.nuxt-link-exact-active, &.nuxt-link-active {
 						color: $color-yellow;
 					}
 				}
@@ -103,7 +103,11 @@
 
 	&__search {
 		margin-right: 40px;
-		position: relative;
+		transition: transform .2s ease;
+
+		&.aside {
+			transform: translateX(-80px);
+		}
 
 		&__button {
 			z-index: 1;
@@ -117,7 +121,16 @@
 		}
 
 		&__inner {
+			overflow: hidden;
+			width: 0;
+			height: 37px;
+			transition: width .2s ease;
+			display: flex;
+			justify-content: flex-end;
 
+			&.active {
+				width: 300px;
+			}
 		}
 
 		&__wrapper {
@@ -138,8 +151,51 @@
 		}
 	}
 
+	&__langs {
+		&__outer {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 2;
+		}
+
+		&__inner {
+			width: 0;
+			height: 27px;
+			display: flex;
+			justify-content: flex-end;
+			overflow: hidden;
+			transition: width .2s ease;
+
+			&.active {
+				width: 120px;
+			}
+		}
+
+		&__wrapper {
+			display: flex;
+		}
+
+		&__item {
+			margin-right: 6px;
+			background: white;
+			width: 36px;
+			height: 27px;
+			font-weight: 600;
+			font-size: 16px;
+			line-height: 27px;
+			text-align: center;
+			color: #322E2E;
+
+			&:last-of-type {
+				margin-right: 0;
+			}
+		}
+	}
+
 	&__search, &__langs {
 		height: 27px;
+		position: relative;
 		
 		&__button {
 			width: 27px;

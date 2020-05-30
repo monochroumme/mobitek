@@ -45,9 +45,21 @@
 		},
 
 		"banners": {
-			"how": "How does fast charging work?",
-			"apple": "Apple Lightning USB cable buy now Baku",
-			"smart": "Smart Home"
+			"how": {
+				"alt": "How does fast charging work?",
+				"title": "HOW DOES FAST CHARGING WORK?",
+				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+			},
+			"apple": {
+				"alt": "Apple Lightning USB cable buy now Baku",
+				"title": "HOW DOES FAST CHARGING WORK?",
+				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+			},
+			"smart": {
+				"alt": "Smart Home",
+				"title": "HOW DOES FAST CHARGING WORK?",
+				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+			}
 		},
 
 		"bottom-features": {

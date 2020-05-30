@@ -1,9 +1,10 @@
 <template>
 	<div class="index-page__video-slider">
 		<div class="channel-button">
-			<button>
-				<img src="~/static/pics/svg/index/youtube.svg" alt="Youtube: Mobitek TV">
-			</button>
+			<a href="https://youtube.com">
+				<img class="hover" src="~/static/pics/svg/index/youtube.svg" alt="Youtube: Mobitek TV">
+				<img class="no-hover" src="~/static/pics/svg/index/youtube-hover.svg" alt="Youtube: Mobitek TV">
+			</a>
 		</div>
 		<div class="index-page__video-slider__content container">
 			<div v-swiper:mySwiper="swiperOption">

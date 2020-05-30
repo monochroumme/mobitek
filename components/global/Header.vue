@@ -1,5 +1,5 @@
 <template>
-	<header class="header" :class="{ 'header--floating': floatPage, 'header--white': whitePage, 'header--transparent': floatPage && transparent }">
+	<header class="header" :class="{ 'header--floating': floatPage, 'header--transparent': floatPage && transparent }">
 		<div class="header__content__wrapper">
 			<div class="header__content container container--header">
 				<div class="header__left">
@@ -24,12 +24,12 @@
 					</ul>
 				</nav>
 				<div class="header__right">
-					<div class="header__search">
+					<div class="header__search" :class="{aside: showLangs}">
 						<button class="header__search__button" @click="showSearchBar = !showSearchBar">
 							<img alt="Search" src="/pics/img/header/search.png">
 						</button>
-						<div class="header__search__outer" v-show="showSearchBar">
-							<div class="header__search__inner" :style="{active: showSearchBar}">
+						<div class="header__search__outer">
+							<div class="header__search__inner" :class="{active: showSearchBar}">
 								<div class="header__search__wrapper">
 									<input type="text" name="search">
 								</div>
@@ -37,9 +37,18 @@
 						</div>
 					</div>
 					<div class="header__langs">
-						<button class="header__langs__button">
+						<button class="header__langs__button" @click="showLangs = !showLangs">
 							<img alt="Languages" src="/pics/img/header/langs.png">
 						</button>
+						<div class="header__langs__outer">
+							<div class="header__langs__inner" :class="{active: showLangs}">
+								<div class="header__langs__wrapper">
+									<button class="header__langs__item" @click="chooseLang('ru')">RU</button>
+									<button class="header__langs__item" @click="chooseLang('az')">AZ</button>
+									<button class="header__langs__item" @click="chooseLang('en')">EN</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -52,6 +61,7 @@ export default {
 	data() {
 		return {
 			showSearchBar: false,
+			showLangs: false,
 			transparent: false
 		}
 	},
@@ -63,17 +73,20 @@ export default {
 
 	computed: {
 		floatPage() {
-			return this.$route.path.toLowerCase() == '/';
-		},
-
-		whitePage() {
-		 // return this.$route.path.toLowerCase() == '/about';
+			return this.$route.path.toLowerCase() == '/' || this.$route.path.toLowerCase() == '/' + this.$i18n.locale;
 		}
 	},
 
 	methods: {
+		chooseLang(lang) {
+			this.showLangs = false;
+			setTimeout(() => {
+				this.$router.push(this.switchLocalePath(lang));
+			}, 200);
+		},
+
 		onScroll() {
-			if (document.querySelector('index-page')) {
+			if (!document.querySelector('.index-page')) {
         return;
       }
 
