@@ -20,14 +20,17 @@
 			<div class="about-page__certificates__inner">
 				<div class="about-page__certificates__item" @click="showCertificate(1)">
 					<img src="/pics/img/about/c1.png" alt="Devia Accessories Authorization Certificate">
+					<img class="onhover" src="/pics/img/about/c1h.png">
 					<button class="about-page__certificates__show"><span>Show</span></button>
 				</div>
 				<div class="about-page__certificates__item" @click="showCertificate(2)">
 					<img src="/pics/img/about/c2.png" alt="Joyroom Authorization Certificate">
+					<img class="onhover" src="/pics/img/about/c2h.png">
 					<button class="about-page__certificates__show"><span>Show</span></button>
 				</div>
 				<div class="about-page__certificates__item" @click="showCertificate(3)">
 					<img src="/pics/img/about/c3.png" alt="Rock Accessories Authorization Certificate">
+					<img class="onhover" src="/pics/img/about/c3h.png">
 					<button class="about-page__certificates__show"><span>Show</span></button>
 				</div>
 			</div>

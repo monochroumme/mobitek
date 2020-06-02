@@ -1,5 +1,5 @@
 <template>
-	<header class="header" :class="{ 'header--floating': floatPage, 'header--transparent': floatPage && transparent }">
+	<header class="header" :class="{ 'header--floating': isExactPage('/'), 'header--transparent': isExactPage('/') && transparent }">
 		<div class="header__content__wrapper">
 			<div class="header__content container container--header">
 				<div class="header__left">
@@ -10,16 +10,16 @@
 				<nav class="header__middle">
 					<ul>
 						<li>
-							<nuxt-link to="/">{{ $t('header.home') }}</nuxt-link>
+							<nuxt-link to="/" :class="{ active: isExactPage('/') }">{{ $t('header.home') }}</nuxt-link>
 						</li>
 						<li>
-							<nuxt-link to="/catalog">{{ $t('header.catalog') }}</nuxt-link>
+							<nuxt-link to="/catalog" :class="{ active: isExactPage('/catalog') }">{{ $t('header.catalog') }}</nuxt-link>
 						</li>
 						<li>
-							<nuxt-link to="/about">{{ $t('header.about') }}</nuxt-link>
+							<nuxt-link to="/about" :class="{ active: isExactPage('/about') }">{{ $t('header.about') }}</nuxt-link>
 						</li>
 						<li>
-							<nuxt-link to="/contacts">{{ $t('header.contacts') }}</nuxt-link>
+							<nuxt-link to="/contacts" :class="{ active: isExactPage('/contacts') }">{{ $t('header.contacts') }}</nuxt-link>
 						</li>
 					</ul>
 				</nav>
@@ -71,18 +71,16 @@ export default {
 		this.onScroll();
 	},
 
-	computed: {
-		floatPage() {
-			return this.$route.path.toLowerCase() == '/' || this.$route.path.toLowerCase() == '/' + this.$i18n.locale;
-		}
-	},
-
 	methods: {
 		chooseLang(lang) {
 			this.showLangs = false;
 			setTimeout(() => {
 				this.$router.push(this.switchLocalePath(lang));
 			}, 200);
+		},
+
+		isExactPage(page) {
+			return this.$route.path.toLowerCase() == page || this.$route.path.toLowerCase() == page + this.$i18n.locale;
 		},
 
 		onScroll() {

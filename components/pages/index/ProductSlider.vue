@@ -1,7 +1,7 @@
 <template>
   <div class="index-page__product-slider">
     <div class="index-page__product-slider__top container container--page">
-      <div class="index-page__product-slider__top__item" v-for="(item, i) in data" :key="i" @click="showSection(i)" :class="{ active: currentSlider == i }">
+      <div class="index-page__product-slider__top__item" v-for="(item, i) in data" :key="i" @click="showSection(i)" :class="{ active: currentSlider == i, center: i == Math.floor(data.length / 2) }">
         <span>{{ item.title }}</span>
       </div>
     </div>

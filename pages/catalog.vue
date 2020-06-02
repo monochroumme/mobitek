@@ -17,26 +17,7 @@
 						<div class="catalog-page__filter__connectors">
 							<div class="catalog-page__filter__choosable catalog-page__filter__connectors__item" v-for="(connector,i) in connectors" @click="connector.chosen = !connector.chosen" :class="{ active: connector.chosen }">{{ connector.title }}</div>
 						</div>
-						<h2 class="catalog-page__filter__section-title">{{ $t('catalog.price') }}</h2>
-						<div class="catalog-page__filter__price">
-							<div class="bar">
-								<div class="min">
-									<img src="/pics/img/catalog/range-slider-pin.png">
-								</div>
-								<div class="max">
-									<img src="/pics/img/catalog/range-slider-pin.png">
-								</div>
-							</div>
-							<div class="catalog-page__filter__prices">
-								<div class="catalog-page__filter__price__item" v-for="(price,i) in prices" :key="i">
-									<div class="dot"></div>
-									<div class="price">
-										<span>{{ price }}</span>
-										<img src="/pics/svg/catalog/manat.svg">
-									</div>
-								</div>
-							</div>
-						</div>
+						<PriceRangeSlider @setMin="setMinimumPrice($event)" @setMax="setMaximumPrice($event)" :prices="prices" />
 					</div>
 				</aside>
 				<main class="catalog-page__content">
@@ -77,6 +58,7 @@
 <script>
 import ProductShowcase from '~/components/pages/index/ProductShowcase';
 import CatalogSearch from '~/components/pages/catalog/CatalogSearch';
+import PriceRangeSlider from '~/components/pages/catalog/PriceRangeSlider';
 import DropdownFilter from '~/components/global/DropdownFilter';
 import Pagination from '~/components/global/Pagination';
 import ColorChooser from '~/components/global/ColorChooser';
@@ -87,7 +69,8 @@ export default {
 		CatalogSearch,
 		DropdownFilter,
 		Pagination,
-		ColorChooser
+		ColorChooser,
+		PriceRangeSlider
 	},
 
 	data() {
@@ -251,6 +234,14 @@ export default {
 			}
 
 			return '';
+		},
+
+		setMinimumPrice(price) {
+			this.minPrice = price;
+		},
+
+		setMaximumPrice(price) {
+			this.maxPrice = price;
 		}
 	}
 }
