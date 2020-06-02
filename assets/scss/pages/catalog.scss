@@ -139,16 +139,9 @@
 				.min, .max {
 					position: absolute;
 					top: -9px;
+					left: 0;
 					z-index: 1;
 					cursor: pointer;
-				}
-
-				.min {
-					left: 0px;
-				}
-
-				.max {
-					right: 0px;
 				}
 			}
 		}

@@ -140,6 +140,14 @@
 			display: flex;
 			justify-content: space-between;
 			margin-bottom: 30px;
+			position: relative;
+
+			.center {
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				transform: translateX(-50%);
+			}
 
 			&__item {
 				color: #838383;
@@ -182,6 +190,7 @@
 			padding: 15px;
 			cursor: pointer;
     	max-width: 300px;
+			transition: box-shadow .2s ease;
 
 			&:hover {
 				box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
@@ -301,7 +310,7 @@
 		img {
 			width: 100%;
 			height: 100%;
-			object-fit: contain;
+			object-fit: cover;
 		}
 
 		.flip-card {
@@ -429,8 +438,6 @@
 					height: 500px;
 
 					.overlay {
-						background: none;
-
 						&.activated {
 							display: none;
 						}
@@ -447,6 +454,11 @@
 			height: 450px;
 			box-shadow: 0px 4px 11px rgba(0, 0, 0, 0.25);
 
+			.video-wrapper {
+				overflow: hidden;
+				max-height: 100%;
+			}
+
 			.overlay {
 				@include flex-center;
 				position: absolute;
@@ -455,7 +467,6 @@
 				width: 100%;
 				height: 100%;
 				cursor: pointer;
-				background: rgba(255,255,255,.5);
 
 				.play {
 					img {
@@ -468,7 +479,7 @@
 
 		iframe {
 			width: 100%;
-			height: 100%;
+			height: 480px;
 		}
 
 		.channel-button {

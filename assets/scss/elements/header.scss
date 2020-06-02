@@ -84,11 +84,11 @@
 					transition: color .2s ease;
 					-webkit-backface-visibility: hidden;
 					backface-visibility: hidden;
-				    -webkit-transform: translateZ(0) scale(1.0, 1.0);
-				    transform: translateZ(0) scale(1.0, 1.0);
-				    font-smoothing: antialiased;
+			    -webkit-transform: translateZ(0) scale(1.0, 1.0);
+			    transform: translateZ(0) scale(1.0, 1.0);
+			    font-smoothing: antialiased;
 
-					&:hover, &.nuxt-link-exact-active, &.nuxt-link-active {
+					&:hover, &.active {
 						color: $color-yellow;
 					}
 				}
