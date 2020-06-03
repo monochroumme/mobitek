@@ -11,6 +11,11 @@
 		flex-wrap: wrap;
 	}
 
+	&__map {
+		width: 100%;
+		height: 700px;
+	}
+
 	&__locations {
 		h2 {
 			font-weight: normal;

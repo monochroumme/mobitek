@@ -32,7 +32,8 @@ export default {
   */
   plugins: [
     '~/plugins/swiper',
-    '~/plugins/bus'
+    '~/plugins/bus',
+    {src: '~/plugins/vue-backtotop', ssr: false}
   ],
   /*
   ** Nuxt.js dev-modules

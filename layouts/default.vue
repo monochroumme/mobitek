@@ -3,17 +3,21 @@
   	<Header />
     <nuxt />
     <Footer />
+
+    <GoToTop />
   </div>
 </template>
 
 <script>
 import Header from '~/components/global/Header';
 import Footer from '~/components/global/Footer';
+import GoToTop from '~/components/global/GoToTop';
 
 export default {
 	components: {
 		Header,
-		Footer
+		Footer,
+		GoToTop
 	},
 
 	watch: {

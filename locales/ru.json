@@ -78,14 +78,6 @@
 		}
 	},
 
-	"shops": {
-		"mall": "Shop Af Mall",
-		"caspian": "Shop Caspian",
-		"mark-1": "Shop Mark 1",
-		"duty": "Shop Duty",
-		"head": "Head Office"
-	},
-
 	"about": {
 		"title": "About Us",
 		"certificates": "Our Certificates"
