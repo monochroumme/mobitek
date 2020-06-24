@@ -1,27 +1,30 @@
 <template>
-	<div v-swiper:productSwiper="productSwiperOption">
+	<div v-swiper:productSwiper="productSwiperOption" class="index-page__product-slider__inner">
 		<div class="swiper-wrapper">
-			<div class="swiper-slide" v-for="(product, i) in data.products" :key="i">
+			<div class="swiper-slide" v-for="(product,i) in data" :key="i">
 				<div class="index-page__product-slider__card">
-					<nuxt-link :to="product.link" class="index-page__product-slider__card__inner">
-						<div class="editors-choice" v-show="product.editorsChoice">
+					<clink :to="`/product/${product.slug}`" class="index-page__product-slider__card__inner">
+						<div class="editors-choice" v-if="product.type == 'editor_choice'">
 							<img src="/pics/img/editors-choice.png" alt="Editor's choice">
 						</div>
 						<div class="pic">
-							<img :src="product.pic" :alt="product.title">
+							<img
+								:src="`${$specImgUrl}${JSON.parse(product.images)[0].url}`"
+					    	:alt="`${JSON.parse(product.images)[0].image}`"
+							>
 						</div>
 						<div class="info">
 							<div class="top">
 								<div class="stars">
-									<img src="~/static/pics/svg/star.svg" alt="Star" v-for="rating in 5" :key="rating" :class="{ active: rating < product.rating }">
+									<img src="~/static/pics/svg/star.svg" alt="Star" v-for="rating in parseInt(product.star)" :key="rating" :class="{ active: rating < product.star }">
 								</div>
-								<span>({{ product.reviews }} {{ getReviewsText(product.reviews) }})</span>
+								 <span>({{ product.interesting }} {{ getReviewsText(product.interesting) }})</span>
 							</div>
-							<div class="title">{{ product.title }}</div>
-							<div class="description">{{ product.description }}</div>
+							<div class="title">{{ product.title[$i18n.locale] }}</div>
+							<div class="description">{{ product.description[$i18n.locale] }}</div>
 						</div>
 						<div class="price">{{ product.price }} azn</div>
-					</nuxt-link>
+					</clink>
 				</div>
 			</div>
 		</div>
@@ -30,21 +33,53 @@
 
 <script>
 export default {
-	props: ['data', 'index'],
+	props: ['data'],
 
 	data() {
 		return {
 			productSwiperOption: {
-				slidesPerView: 4,
-				spaceBetween: 25,
+				slidesPerView: 'auto',
+				spaceBetween: 15,
 				loop: true,
 				observer: true,
-				observeParents: true
+				observeParents: true,
+				centeredSlides: true,
+				init: false,
+
+				breakpoints: {
+					1151: {
+						spaceBetween: 25,
+						slidesPerView: 4,
+						centeredSlides: false
+					},
+					901: {
+						spaceBetween: 25,
+						slidesPerView: 3,
+						centeredSlides: false
+					},
+					651: {
+						spaceBetween: 25,
+						slidesPerView: 2,
+						centeredSlides: false
+					},
+					451: {
+						spaceBetween: 25,
+						spaceBetween: 25,
+						slidesPerView: 'auto',
+						centeredSlides: true
+					}
+				}
 			}
 		}
 	},
 
 	mounted() {
+		this.productSwiper.on('init', () => {
+      this.productSwiper.slideTo(1);
+    });
+
+    this.productSwiper.init(this.productSwiperOption);
+
 		this.$bus.$on('product-slide', data => {
 			if (data.index == this.index) {
 				if (data.left)

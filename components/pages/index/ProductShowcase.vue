@@ -2,49 +2,28 @@
 	<div class="index-page__product-showcase container container--page">
 		<div class="index-page__product-showcase__card">
 			<div class="index-page__product-showcase__card__content">
-				<nuxt-link to="/" class="index-page__product-showcase__card__item">
+				<a :href="`/catalog?cat=${cat.id}`" class="index-page__product-showcase__card__item" v-for="(cat,i) in data" :key="i" :class="{active: cat.id == chosen}" @click.prevent="chooseCat(cat.id)">
 					<div class="index-page__product-showcase__card__item__icon">
-						<img src="~/static/pics/svg/index/ps-charger.svg" :alt="$t('index.product-showcase.charger')">
+						<img :src="`/pics/svg/index/ps-${cat.slug.toLowerCase()}.svg`" :alt="cat.title[$i18n.locale]">
 					</div>
-					<span>{{ $t('index.product-showcase.charger') }}</span>
-				</nuxt-link>
-				<nuxt-link to="/" class="index-page__product-showcase__card__item">
-					<div class="index-page__product-showcase__card__item__icon">
-						<img src="~/static/pics/svg/index/ps-car.svg" :alt="$t('index.product-showcase.car')">
-					</div>
-					<span>{{ $t('index.product-showcase.car') }}</span>
-				</nuxt-link>
-				<nuxt-link to="/" class="index-page__product-showcase__card__item">
-					<div class="index-page__product-showcase__card__item__icon">
-						<img src="~/static/pics/svg/index/ps-audio.svg" :alt="$t('index.product-showcase.audio')">
-					</div>
-					<span>{{ $t('index.product-showcase.audio') }}</span>
-				</nuxt-link>
-				<nuxt-link to="/" class="index-page__product-showcase__card__item">
-					<div class="index-page__product-showcase__card__item__icon">
-						<img src="~/static/pics/svg/index/ps-protectors-cases.svg" :alt="$t('index.product-showcase.protectors-cases')">
-					</div>
-					<span>{{ $t('index.product-showcase.protectors-cases') }}</span>
-				</nuxt-link>
-				<nuxt-link to="/" class="index-page__product-showcase__card__item">
-					<div class="index-page__product-showcase__card__item__icon">
-						<img src="~/static/pics/svg/index/ps-usb.svg" :alt="$t('index.product-showcase.usb')">
-					</div>
-					<span>{{ $t('index.product-showcase.usb') }}</span>
-				</nuxt-link>
-				<nuxt-link to="/" class="index-page__product-showcase__card__item">
-					<div class="index-page__product-showcase__card__item__icon">
-						<img src="~/static/pics/svg/index/ps-home.svg" :alt="$t('index.product-showcase.home')">
-					</div>
-					<span>{{ $t('index.product-showcase.home') }}</span>
-				</nuxt-link>
-				<nuxt-link to="/" class="index-page__product-showcase__card__item">
-					<div class="index-page__product-showcase__card__item__icon">
-						<img src="~/static/pics/svg/index/ps-game.svg" :alt="$t('index.product-showcase.game')">
-					</div>
-					<span>{{ $t('index.product-showcase.game') }}</span>
-				</nuxt-link>
+					<span>{{ cat.title[$i18n.locale] }}</span>
+				</a>
 			</div>
 		</div>
 	</div>
 </template>
+
+<script>
+export default {
+	props: ['data', 'chosen'],
+
+	methods: {
+		chooseCat(id) {
+			// if not on the catalog page
+			if (this.$route.path.toLowerCase() != '/catalog' && this.$route.path.toLowerCase() != `/${this.$i18n.locale}/catalog`) {
+				this.$router.push(this.$i18n.locale == 'en' ? `/catalog?cat=${id}` : `/${this.$i18n.locale}/catalog?cat=${id}`);
+			} else this.$emit('chooseCat', id);
+		}
+	}
+}
+</script>

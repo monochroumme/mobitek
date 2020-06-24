@@ -1,58 +1,63 @@
 <template>
-	<div class="catalog-page">
-		<ProductShowcase class="catalog-page__product-showcase" />
-		<div class="catalog-page__inner container">
-			<h1 class="catalog-page__title">{{ $t('catalog.search-for-products') }}</h1>
-			<CatalogSearch @search="search" v-model="searchInput" />
-			<div class="catalog-page__double">
-				<aside class="catalog-page__filter">
-					<div class="catalog-page__filter__inner">
-						<h2 class="catalog-page__filter__section-title">{{ $t('catalog.color') }}</h2>
-						<ColorChooser v-model="colors" />
-						<h2 class="catalog-page__filter__section-title">{{ $t('catalog.brand') }}</h2>
-						<div class="catalog-page__filter__brands">
-							<div class="catalog-page__filter__choosable catalog-page__filter__brands__item" v-for="(brand,i) in brands" :key="i" @click="brand.chosen = !brand.chosen" :class="{ active: brand.chosen }">{{ brand.title }}</div>
-						</div>
-						<h2 class="catalog-page__filter__section-title">{{ $t('catalog.connector') }}</h2>
-						<div class="catalog-page__filter__connectors">
-							<div class="catalog-page__filter__choosable catalog-page__filter__connectors__item" v-for="(connector,i) in connectors" @click="connector.chosen = !connector.chosen" :class="{ active: connector.chosen }">{{ connector.title }}</div>
-						</div>
-						<PriceRangeSlider @setMin="setMinimumPrice($event)" @setMax="setMaximumPrice($event)" :prices="prices" />
-					</div>
-				</aside>
-				<main class="catalog-page__content">
-					<div class="catalog-page__top-filters">
-						<DropdownFilter v-model="filterByPrice" :options="filtersByPrice" />
-						<DropdownFilter v-model="filterByProductNewness" :options="filtersByProductNewness" />
-					</div>
-					<div class="catalog-page__products">
-						<div class="index-page__product-slider__card" v-for="(product,i) in products.slice((page-1)*perPage, Math.min(page*perPage, products.length))" :key="i">
-							<nuxt-link :to="product.link" class="index-page__product-slider__card__inner">
-								<div class="editors-choice" v-show="product.editorsChoice">
-									<img src="/pics/img/editors-choice.png" alt="Editor's choice">
-								</div>
-								<div class="pic">
-									<img :src="product.pic" :alt="product.title">
-								</div>
-								<div class="info">
-									<div class="top">
-										<div class="stars">
-											<img src="~/static/pics/svg/star.svg" alt="Star" v-for="rating in 5" :key="rating" :class="{ active: rating < product.rating }">
-										</div>
-										<span>({{ product.reviews }} {{ getReviewsText(product.reviews) }})</span>
-									</div>
-									<div class="title">{{ product.title }}</div>
-									<div class="description">{{ product.description }}</div>
-								</div>
-								<div class="price">{{ product.price }} azn</div>
-							</nuxt-link>
-						</div>
-					</div>
-					<Pagination v-model="page" :perPage="perPage" :totalElems="4" :emptyText="$t('catalog.empty')" />
-				</main>
-			</div>
-		</div>
-	</div>
+  <div class="catalog-page">
+    <ProductShowcase class="catalog-page__product-showcase" :data="categories" :chosen="category" @chooseCat="chooseCat($event)" />
+    <div class="catalog-page__inner container">
+      <h1 class="catalog-page__title">{{ $t('catalog.search-for-products') }}</h1>
+      <CatalogSearch @search="updateQuery()" v-model="searchInput" />
+      <div class="catalog-page__double">
+        <aside class="catalog-page__filter">
+          <button class="catalog-page__filter__mobile-toggler" @click="toggleMobileFilters()">
+            <span>{{ $t('catalog.filters') }}</span>
+          </button>
+          <div class="catalog-page__filter__inner">
+            <div class="catalog-page__filter__content">
+              <h2 class="catalog-page__filter__section-title">{{ $t('catalog.color') }}</h2>
+              <ColorChooser :colors="colors" :chosen="chosenColors" @toggleColor="toggleColor($event)" />
+              <h2 class="catalog-page__filter__section-title">{{ $t('catalog.brand') }}</h2>
+              <div class="catalog-page__filter__brands">
+                <div class="catalog-page__filter__choosable catalog-page__filter__brands__item" v-for="(brand,i) in brands" :key="i" @click="chooseBrand(brand.slug)" :class="{ active: chosenBrand == brand.slug }">{{ brand.title[$i18n.locale] }}</div>
+              </div>
+              <h2 class="catalog-page__filter__section-title">{{ $t('catalog.connector') }}</h2>
+              <div class="catalog-page__filter__connectors">
+                <div class="catalog-page__filter__choosable catalog-page__filter__connectors__item" v-for="(connector,i) in connectors" @click="chooseConnector(connector.slug)" :class="{ active: chosenConnector == connector.slug }">{{ connector.title }}</div>
+              </div>
+              <PriceRangeSlider @setMin="setMinimumPrice($event)" @setMax="setMaximumPrice($event)" :prices="prices" />
+            </div>
+          </div>
+        </aside>
+        <main class="catalog-page__content">
+          <div class="catalog-page__top-filters">
+            <DropdownFilter v-model="filterByPrice" :options="filtersByPrice" class="filter-left" />
+            <DropdownFilter v-model="filterByProductNewness" :options="filtersByProductNewness" class="filter-right" />
+          </div>
+          <div class="catalog-page__products">
+            <div class="index-page__product-slider__card" v-for="(product,i) in products" :key="i">
+              <clink :to="`/product/${product.slug}`" class="index-page__product-slider__card__inner">
+                <div class="editors-choice" v-show="product.type == 'editor_choice'">
+                  <img src="/pics/img/editors-choice.png" alt="Editor's choice">
+                </div>
+                <div class="pic">
+                  <img :src="`${$specImgUrl}${JSON.parse(product.images)[0].url}`" :alt="product.title[$i18n.locale]">
+                </div>
+                <div class="info">
+                  <div class="top">
+                    <div class="stars">
+                      <img src="~/static/pics/svg/star.svg" alt="Star" v-for="rating in parseInt(product.star)" :key="rating" :class="{ active: rating < product.star }">
+                    </div>
+                    <span>({{ product.interesting }} {{ getReviewsText(product.interesting) }})</span>
+                  </div>
+                  <div class="title">{{ product.title[$i18n.locale] }}</div>
+                  <div class="description">{{ product.description[$i18n.locale] }}</div>
+                </div>
+                <div class="price">{{ product.price }} azn</div>
+              </clink>
+            </div>
+          </div>
+          <Pagination v-model="page" :perPage="perPage" :totalElems="totalProducts" emptyText="catalog.empty" />
+        </main>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -63,186 +68,311 @@ import DropdownFilter from '~/components/global/DropdownFilter';
 import Pagination from '~/components/global/Pagination';
 import ColorChooser from '~/components/global/ColorChooser';
 
+import {mapState,mapActions} from 'vuex';
+
 export default {
-	components: {
-		ProductShowcase,
-		CatalogSearch,
-		DropdownFilter,
-		Pagination,
-		ColorChooser,
-		PriceRangeSlider
-	},
+  components: {
+    ProductShowcase,
+    CatalogSearch,
+    DropdownFilter,
+    Pagination,
+    ColorChooser,
+    PriceRangeSlider
+  },
 
-	data() {
-		return {
-			searchInput: '',
-			
-			minPrice: 0,
-			maxPrice: 500,
+  head() {
+    return {
+      title: `${this.$t('MetaTitle')}`,
+      meta: [
+        { name: 'description', content: `${this.$t('metaDescription')}` || '' },
+        { property: 'og:title', content: `${this.$t('MetaTitle')}` || '' } ,
+        { property: 'og:description', content: `${this.$t('metaDescription')}` || '' } ,
+        { property: 'og:image', content: '/seo/seo.jpg' || '' } ,
+        { property: 'og:url', content: `https://mobitek.az/${this.$route.fullPath}` || '' } ,
+        { property: 'twitter:card', content: '/seo/seo.jpg' || '' } ,
+        { name: 'keywords', content: `${this.$t('keywords')}` || '' },
+      ]
+    }
+  },
 
-			filterByPrice: 'ascending',
-			filterByProductNewness: 'new',
+  data() {
+    return {
+      searchInput: '',
 
-			page: 1,
-			perPage: 3,
+      mobileFiltersShown: true,
 
-			filtersByPrice: [
-				'ascending',
-				'descending'
-			],
+      minPrice: 0,
+      maxPrice: 500,
 
-			filtersByProductNewness: [
-				'new',
-				'old'
-			],
+      filterByPrice: 'ascending',
+      filterByProductNewness: 'new',
 
-			colors: [
-				{
-					color: 'red',
-					chosen: false	
-				},
-				{
-					color: 'yellow',
-					chosen: false
-				},
-				{
-					color: 'purple',
-					chosen: false
-				},
-				{
-					color: 'black',
-					chosen: false
-				},
-				{
-					color: 'gray',
-					chosen: false
-				}
-			],
+      page: 1,
+      perPage: 15,
 
-			brands: [
-				{
-					title: 'Baseus',
-					chosen: false
-				},
-				{
-					title: 'Samsung',
-					chosen: false
-				},
-				{
-					title: 'RAVpower',
-					chosen: false
-				},
-				{
-					title: 'Apple',
-					chosen: false
-				},
-				{
-					title: 'Joyroom',
-					chosen: false
-				},
-				{
-					title: 'Anker',
-					chosen: false
-				},
-				{
-					title: 'Milli',
-					chosen: false
-				},
-				{
-					title: 'Remax',
-					chosen: false
-				},
-			],
+      filtersByPrice: [
+        'ascending',
+        'descending'
+      ],
 
-			connectors: [
-				{
-					title: 'Lightning',
-					chosen: false
-				},
-				{
-					title: 'Micro',
-					chosen: false
-				},
-				{
-					title: 'Type-C',
-					chosen: false
-				},
-				{
-					title: 'Power Delivery (PD)',
-					chosen: false
-				}
-			],
+      filtersByProductNewness: [
+        'new',
+        'old'
+      ],
 
-			products: [
-        {
-          reviews: 79,
-          title: 'PD Pioneer 20000mAh Portable Charger',
-          description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
-          rating: 5,
-          pic: 'pics/img/index/p1.png',
-          link: '/product/xz',
-          price: 45
-        },
-        {
-          reviews: 79,
-          title: 'Anker PowerWave Pad & Stand 7.5W',
-          description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
-          rating: 5,
-          pic: 'pics/img/index/p2.png',
-          link: '/product/xz',
-          price: 45
-        },
-        {
-          reviews: 79,
-          title: 'Anker PowerPort Speed PD 5',
-          description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
-          rating: 5,
-          pic: 'pics/img/index/p3.png',
-          link: '/product/xz',
-          editorsChoice: true,
-          price: 45
-        },
-        {
-          reviews: 79,
-          title: 'Baseus Encok True Wireless Earphones W07',
-          description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
-          rating: 5,
-          pic: 'pics/img/index/p4.png',
-          link: '/product/xz',
-          price: 45
-        }
-			],
+      chosenBrand: '',
+      chosenConnector: '',
+      chosenColors: [],
+      prices: [0, 50, 100, 500, 'inf'],
 
-			prices: [0,25,50,100,500]
-		}
-	},
+      category: null
+    }
+  },
 
-	methods: {
-		search() {
+  watch: {
+    minPrice(n, o) {
+      this.updateQuery();
+    },
 
-		},
+    maxPrice(n, o) {
+      this.updateQuery();
+    },
 
-		getReviewsText(reviewCount) {
-			if (this.$i18n.locale == 'en') {
-				if (reviewCount % 10 == 1)
-					return 'review';
-				else return 'reviews';
-			} else if (this.$i18n.locale == 'ru') {
-				return 'ревью';
-			} else if (this.$i18n.locale == 'az') {
-				return 'revyu';
-			}
+    filterByPrice(n, o) {
+      this.updateQuery();
+    },
 
-			return '';
-		},
+    filterByProductNewness(n, o) {
+      this.updateQuery();
+    },
 
-		setMinimumPrice(price) {
-			this.minPrice = price;
-		},
+    page(n, o) {
+      this.updateQuery(true);
+    }
+  },
 
-		setMaximumPrice(price) {
-			this.maxPrice = price;
-		}
-	}
+  watchQuery(n, o) {
+    this.search();
+  },
+
+  async fetch() {
+  	await this.$store.dispatch('catalog/getBrands');
+  	await this.$store.dispatch('catalog/getConnectors');
+  	await this.$store.dispatch('catalog/getColors');
+    await this.$store.dispatch('getCategories');
+  },
+
+  mounted() {
+    window.addEventListener('resize', this.onResize, false);
+    setTimeout(() => {
+      this.onResize();
+    }, 1);
+
+    this.chosenColors = new Array(this.colors.length).fill(false);
+  	this.readURLQuery();
+    this.search();
+
+    this.$bus.$on('search', searchInput => {
+      this.searchInput = searchInput;
+      this.updateQuery();
+    });
+  },
+
+  computed: {
+  	...mapState('catalog', ['products', 'brands', 'connectors', 'totalProducts', 'colors']),
+    ...mapState(['categories'])
+  },
+
+  methods: {
+  	...mapActions('catalog', ['getProducts']),
+
+    chooseBrand(brand) {
+      this.chosenBrand = brand;
+      this.updateQuery();
+    },
+
+    chooseConnector(connector) {
+      this.chosenConnector = connector;
+      this.updateQuery();
+    },
+
+    chooseCat(cat) {
+      if (this.category != cat)
+        this.category = cat;
+      else this.category = null;
+      this.updateQuery();
+    },
+
+  	toggleColor(i) {
+  		this.chosenColors[i] = !this.chosenColors[i];
+  		this.chosenColors.push({});
+  		this.chosenColors.pop();
+  		this.updateQuery();
+  	},
+
+    getReviewsText(reviewCount) {
+      if (this.$i18n.locale == 'en') {
+        if (reviewCount % 10 == 1)
+          return 'review';
+        else return 'reviews';
+      } else if (this.$i18n.locale == 'ru') {
+        return 'ревью';
+      } else if (this.$i18n.locale == 'az') {
+        return 'revyu';
+      }
+
+      return '';
+    },
+
+    setMinimumPrice(price) {
+      this.minPrice = price;
+    },
+
+    setMaximumPrice(price) {
+      this.maxPrice = price;
+    },
+
+    search() {
+      this.getProducts(this.getSearchQuery());
+    },
+
+    readURLQuery() {
+      let cur;
+
+      if (this.$route.query.cat)
+        this.category = this.$route.query.cat;
+
+      if (this.$route.query.brand)
+        this.chosenBrand = this.$route.query.brand;
+
+      if (this.$route.query.connector)
+      	this.chosenConnector = this.$route.query.connector;
+
+      if (this.$route.query.color) {
+      	if (this.$route.query.color.forEach) { // means it's an array
+      		this.$route.query.color.forEach(slug => {
+      			if (cur = this.colors.findIndex(c => c.slug == slug))
+      				this.chosenColors[cur] = true;
+      		});
+	      } else {
+	      	if (cur = this.colors.findIndex(c => c.slug == this.$route.query.color))
+	      		this.chosenColors[cur] = true;
+	      }
+      }
+
+      if (this.$route.query.title)
+        this.searchInput = this.$route.query.title;
+
+      if (this.$route.query.min_price) {
+        this.minPrice = this.$route.query.min_price;
+        this.$bus.$emit('setMin', this.minPrice);
+      }
+
+      if (this.$route.query.max_price) {
+        this.maxPrice = this.$route.query.max_price;
+        this.$bus.$emit('setMax', this.maxPrice);
+      }
+
+      if (this.$route.query.order == 'asc')
+        this.filterByProductNewness = 'old';
+      else if (this.$route.query.order == 'desc')
+        this.filterByProductNewness = 'new';
+
+      if (this.$route.query.price == 'asc')
+        this.filterByPrice = 'ascending';
+      else if (this.$route.query.price == 'desc')
+        this.filterByPrice = 'descending';
+    },
+
+    updateQuery(savePage) {
+      if (!savePage)
+        this.curPage = 1;
+      this.$router.push({ query: this.getURLQuery() });
+    },
+
+    getURLQuery() {
+      // brand=Anker&color=%23A1A1A1&title=PowerDrive&type=editor_choice&cat=19&lang=en&min_price=10&max_price=60&order=asc&connector=lightning
+
+      let query = {};
+
+      for (let i = 0; i < this.colors.length; i++) {
+      	if (this.chosenColors[i]) {
+      		if (!query.color)
+            query.color = [];
+          query.color.push(this.colors[i].title);
+      	}
+      }
+
+      if (this.chosenBrand.length > 0)
+        query.brand = this.chosenBrand;
+
+      if (this.chosenConnector.length > 0)
+        query.connector = this.chosenConnector;
+
+      if (this.filterByProductNewness == 'old')
+        query.order = 'asc';
+      else if (this.filterByProductNewness == 'new')
+        query.order = 'desc';
+
+      if (this.filterByPrice == 'ascending')
+        query.price = 'asc';
+      else if (this.filterByPrice == 'descending')
+        query.price = 'desc';
+
+      if (this.category)
+        query.cat = this.category;
+
+      if (this.type)
+        query.type = this.type;
+
+      if (this.searchInput.trim().length > 0)
+        query.title = this.searchInput.trim();
+
+      query.min_price = this.minPrice;
+      query.max_price = this.maxPrice;
+
+      query.page = this.page;
+
+      return query;
+    },
+
+    getSearchQuery() {
+      let query = this.getURLQuery();
+
+      if (this.$i18n)
+        query.lang = this.$i18n.locale;
+      query.per_page = this.perPage;
+
+      return query;
+    },
+
+    toggleMobileFilters() {
+      this.mobileFiltersShown = !this.mobileFiltersShown;
+
+      let filters = this.$el.querySelector('.catalog-page__filter__inner');
+
+      if (this.mobileFiltersShown)
+        filters.style.height = filters.scrollHeight + 'px';
+      else
+        filters.style.height = 0;
+    },
+
+    onResize() {
+      if (!document.querySelector('.catalog-page')) {
+        window.removeEventListener('resize', this.onResize, false);
+        return;
+      }
+
+      if (window.innerWidth > 650) {
+        if (!this.mobileFiltersShown)
+          this.mobileFiltersShown = true;
+        this.$el.querySelector('.catalog-page__filter__inner').style.height = '';
+      } else {
+        if (this.mobileFiltersShown)
+          this.toggleMobileFilters();
+      }
+    }
+  }
 }
+
 </script>
