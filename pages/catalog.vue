@@ -187,12 +187,16 @@ export default {
   	...mapActions('catalog', ['getProducts']),
 
     chooseBrand(brand) {
-      this.chosenBrand = brand;
+      if (this.chosenBrand != brand)
+        this.chosenBrand = brand;
+      else this.chosenBrand = '';
       this.updateQuery();
     },
 
     chooseConnector(connector) {
-      this.chosenConnector = connector;
+      if (this.chosenConnector != connector)
+        this.chosenConnector = connector;
+      else this.chosenConnector = '';
       this.updateQuery();
     },
 
