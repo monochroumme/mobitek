@@ -1,29 +1,33 @@
 <template>
-	<div class="store-card">
+	<div class="store-card" @click="onClick()">
 		<div class="store-card__inner">
 			<div class="store-card__top">
 				<img class="logo" src="/pics/svg/contacts/card-logo.svg" alt="mobitek">
 				<img class="bg" src="/pics/svg/contacts/card-rectangle-big.svg">
-				<h2 class="title">{{ $t(data.title) }}</h2>
+				<img class="bg small" src="/pics/svg/contacts/card-rectangle.svg">
+				<img class="bg tiny" src="/pics/svg/contacts/card-rectangle-tiny.svg">
+				<h2 class="title">{{ data.title[$i18n.locale] }}</h2>
 			</div>
 			<div class="store-card__bottom">
-				<div class="row">
+				<h3 class="details big">{{ $t('contacts.card.details') }}</h3>
+				<div class="row special">
 					<div class="item">
 						<img src="/pics/img/contacts/phone.png" alt="phone">
-						<a class="phone" :href="`tel:${data.phone ? data.phone.replace(' ', '').replace('(', '').replace(')', '') : '/'}`"><span>{{ data.phone }}</span></a>
+						<a @click.stop class="phone" :href="`tel:${data.number ? data.number.replace(' ', '').replace('(', '').replace(')', '') : '/'}`"><span>{{ data.number }}</span></a>
+						<a @click.stop target="_blank" class="see-on-map top" :href="`https://maps.google.com/?ll=${data.lat},${data.lng}&z=16`">{{ $t('contacts.card.see-address') }}</a>
 					</div>
 					<div class="item">
 						<img src="/pics/img/contacts/mail.png" alt="email">
-						<a :href="`mail:${data.email}`"><span>{{ data.email }}</span></a>
+						<a @click.stop :href="`mail:${data.mail}`"><span>{{ data.mail }}</span></a>
 					</div>
 				</div>
 				<div class="row">
 					<div class="item">
 						<img src="/pics/img/contacts/map-pin.png" alt="location">
-						<a href="/"><span>{{ data.address }}</span></a>
+						<a @click.stop target="_blank" :href="`https://maps.google.com/?ll=${data.lat},${data.lng}&z=16`"><span>{{ data.address }}</span></a>
 					</div>
 					<div class="item">
-						<a class="see-on-map" :href="data.mapLink">{{ $t('contacts.card.see-address') }}</a>
+						<a @click.stop target="_blank" class="see-on-map bottom" :href="`https://maps.google.com/?ll=${data.lat},${data.lng}&z=16`">{{ $t('contacts.card.see-address') }}</a>
 					</div>
 				</div>
 			</div>
@@ -33,6 +37,12 @@
 
 <script>
 export default {
-	props: ['data']
+	props: ['data'],
+
+	methods: {
+		onClick() {
+			this.$emit('showOnMap', {lat: this.data.lat, lng: this.data.lng});
+		}
+	}
 }
 </script>

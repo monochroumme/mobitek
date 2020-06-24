@@ -24,6 +24,10 @@ input {
   }
 }
 
+input, textarea {
+  outline: none;
+}
+
 button {
   cursor: pointer;
   padding: 0;
@@ -89,5 +93,42 @@ button {
     width: 73px;
     height: 3px;
     background: #333333;
+  }
+}
+
+@media (max-width: 1000px) {
+  .desktop-1000 {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .desktop-800 {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .desktop-500 {
+    display: none;
+  }
+
+  .page-title {
+    margin-top: 0;
+
+    h1 {
+      font-size: 25px;
+      line-height: 42px;
+    }
+
+    .line {
+      width: 53px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .desktop-450 {
+    display: none;
   }
 }

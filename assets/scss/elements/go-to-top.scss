@@ -1,0 +1,27 @@
+.go-to-top {
+	.vue-back-to-top {
+		right: 100px !important;
+	}
+}
+
+@media (max-width: 1000px) {
+	.go-to-top {
+		img {
+			width: 60px;
+			height: 60px;
+		}
+
+		.vue-back-to-top {
+			right: 50px !important;
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.go-to-top {
+		.vue-back-to-top {
+			right: 20px !important;
+			bottom: 20px !important;
+		}
+	}
+}

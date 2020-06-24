@@ -30,18 +30,11 @@
 	},
 
 	"index": {
-		"product-showcase": {
-			"charger": "Charger",
-			"car": "Car",
-			"audio": "Audio",
-			"protectors-cases": "Protectors & Cases",
-			"usb": "USB Cables",
-			"home": "Home Appliance",
-			"game": "Game"
-		},
-
 		"product-slider": {
-			"see-more": "See More"
+			"see-more": "See More",
+			"top-rated": "Top rated products",
+			"editors-choice": "Editor's Choices",
+			"best-sellers": "Best Sellers"
 		},
 
 		"banners": {
@@ -51,14 +44,14 @@
 				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
 			},
 			"apple": {
-				"alt": "Apple Lightning USB cable buy now Baku",
-				"title": "HOW DOES FAST CHARGING WORK?",
-				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+				"alt": "What is Apple MFI License?",
+				"title": "What is Apple MFI License?",
+				"text": "Apple MFi certification is a license shown that Apple (Apple Inc.) has authorized accessory manufacturers to mark the MFi logo on their products. MFi is the abbreviation of Made for iPod, Made for iPhone, and Made for iPad. Apple allows manufacturers to print the MFi logo on the product package."
 			},
 			"smart": {
-				"alt": "Smart Home",
-				"title": "HOW DOES FAST CHARGING WORK?",
-				"text": "Quick Charge is a technology featured in Qualcomm Snapdragon SoCs, used in devices such as mobile phones, for managing power delivered over USB, mainly by communicating to the power supply and negotiating a voltage. It increases the voltage and thus charges batteries in devices faster than standard USB rates allow."
+				"alt": "Smart Home?-Yes,Please",
+				"title": "Smart Home?-Yes,Please",
+				"text": "'Smart home' denotes the use of technical systems, automated processes and connected, remote-controlled devices in apartments and houses. The main objective of the functions is to improve the quality of life and convenience in the home. Other goals are greater security and more efficient use of energy thanks to connected, remote-controllable devices."
 			}
 		},
 
@@ -78,17 +71,10 @@
 		}
 	},
 
-	"shops": {
-		"mall": "Shop Af Mall",
-		"caspian": "Shop Caspian",
-		"mark-1": "Shop Mark 1",
-		"duty": "Shop Duty",
-		"head": "Head Office"
-	},
-
 	"about": {
 		"title": "About Us",
-		"certificates": "Our Certificates"
+		"certificates": "Our Certificates",
+		"show": "Show"
 	},
 
 	"catalog": {
@@ -100,7 +86,8 @@
 		"brand": "Brand",
 		"connector": "Connector",
 		"price": "Price",
-		"empty": "No results"
+		"empty": "No results",
+		"filters": "Filters"
 	},
 
 	"product": {
@@ -114,5 +101,15 @@
 		"add-to-cart": "ADD TO CART",
 		"buy-now": "BUY NOW",
 		"also-buy": "You can also buy"
+	},
+	"MetaTitle": "Mobitek.az | Accessories & Gadgets",
+    "metaDescription": "We proudly provide WHOLESALE and RETAIL sales of products such as Speakers, Headphones, Powerbanks and etc. with well made HIGH QUALITY at AFFORDABLE PRICES which belong to the well-known Brands from all over the World",
+    "keywords":"powerbank,powerbanks,adapter,charger,wireless,wirelesscharger,car,caraccesories,phone,smartphone,gadgets,home,game,videogame,videogames,wire,gaming,ps4,ps3,playstation,carcharger,adapters,case,cases,screenprotectors,screenprotector,cable,cables,speaker,speakers,JBL,marshall,,mobitek,mobitekaz,mobitekazerbaijan,mobitel,mi,powerology,mfi,apple,xiaomi,anker,ravpower,audio,headphone,earphone,headphones,devia,rock,joyroom",
+	"validate": {
+		"chosenColor": "Colors are not selected",
+		"notAll": "Not all required sections filled",
+		"success": "Your application is accepted",
+		"writeUs": "Thanks for subscribe",
+		"notWriteUs": "Mail can't be empty"
 	}
 }

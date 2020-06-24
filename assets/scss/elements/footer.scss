@@ -84,6 +84,8 @@
 				padding: 5px 15px;
 				font-weight: 500;
 				color: #AAAAAA;
+				border: none;
+				border-radius: 0;
 			}
 
 			button {
@@ -92,6 +94,10 @@
 				color: #FFFFFF;
 				padding: 5px 25px;
 				@include flex-center;
+
+				span {
+					margin-bottom: 0;
+				}
 			}
 		}
 	}
@@ -103,5 +109,169 @@
 		color: #FFFFFF;
 		margin-bottom: 6px;
 		display: block;
+	}
+}
+
+@media (max-width: 1400px) {
+	.footer {
+		&__content {
+			padding: 0 40px;
+			justify-content: center;
+		}
+
+		&__left {
+			width: unset;
+		}
+	}
+}
+
+@media (max-width: 1220px) {
+	.footer {
+		&__content {
+			justify-content: center;
+		}
+
+		&__left {
+			flex-wrap: wrap;
+			margin: -20px;
+			width: unset;
+			padding-right: 50px;
+
+			&__item {
+				max-width: 50%;
+				margin: 20px 0;
+				padding: 0 20px;
+			}
+		}
+	}
+}
+
+@media (max-width: 1100px) {
+	.footer {
+		&__left {
+			&__item {
+				width: 100%;
+			}
+		}
+	}
+}
+
+@media (max-width: 750px) {
+	.footer {
+		&__content {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		&__left {
+			padding-bottom: 40px;
+			justify-content: center;
+
+			&__item {
+				max-width: unset;
+				width: 250px;
+			}
+		}
+
+		&__stay-connected {
+			max-width: 500px;
+			width: 100%;
+		}
+	}
+}
+
+@media (max-width: 600px) {
+	.footer {
+		&__left {
+			padding-right: 0;
+
+			&__item {
+				width: 200px;
+			}
+		}
+
+		&__stay-connected {
+			max-width: 360px;
+		}
+	}
+}
+
+@media (max-width: 500px) {
+	.footer {
+		&__content {
+			padding: 0 30px;
+			align-items: flex-start;
+		}
+
+		&__left {
+			margin: 0;
+			// width: 100%;
+
+			&__item {
+				width: 50%;
+				padding: 0;
+			}
+		}
+
+		&__stay-connected {
+			max-width: unset;
+		}
+	}
+}
+
+@media (max-width: 400px) {
+	.footer {
+		padding-top: 20px;
+
+		&__stay-connected {
+			width: 100%;
+
+			.title {
+				font-weight: 500;
+				font-size: 19px;
+				line-height: 32px;
+				margin-bottom: 0;
+			}
+
+			.text {
+				font-weight: 500;
+				font-size: 15px;
+				line-height: 25px;
+				margin-bottom: 10px;
+			}
+
+			.send {
+				width: 100%;
+			}
+		}
+
+		&__left {
+			padding-right: 0;
+			padding-bottom: 30px;
+
+			&__item {
+				.title {
+					font-size: 12px;
+					line-height: 20px;
+				}
+
+				ul {
+					li {
+						a {
+							font-size: 10px;
+							line-height: 17px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+body.touch {
+	.footer {
+		a:hover {
+			opacity: 1 !important;
+		}
 	}
 }

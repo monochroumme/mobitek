@@ -1,31 +1,18 @@
 <template>
 	<div class="color-chooser">
-		<div class="color-chooser__item__wrapper" v-for="(item,i) in value" :key="i">
-			<div class="color-chooser__item" @click="choose(i)" :class="{
-				red: item.color == 'red',
-				yellow: item .color== 'yellow',
-				purple: item.color == 'purple',
-				black: item .color== 'black',
-				gray: item.color == 'gray',
-				active: item.chosen
-			}"></div>
+		<div class="color-chooser__item__wrapper" v-for="(item,i) in colors" :key="i">
+			<div class="color-chooser__item" @click="choose(radio ? item : i)" :style="{background: (radio ? item : item.title) }" :class="{ active: chosen.forEach && chosen[i] || chosen == item && radio }"></div>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	props: ['value'],
+	props: ['colors', 'chosen', 'radio'],
 
 	methods: {
 		choose(i) {
-			let colors = this.value.slice();
-			colors[i].chosen = !colors[i].chosen;
-			this.$emit('input', colors);
-			colors.push({});
-			this.$emit('input', colors);
-			colors.pop();
-			this.$emit('input', colors);
+			this.$emit('toggleColor', i);
 		}
 	}
 }

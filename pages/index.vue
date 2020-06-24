@@ -1,10 +1,10 @@
 <template>
   <div class="index-page">
-    <Welcome :data="welcomePics" />
-    <ProductShowcase />
-    <ProductSlider :data="products" />
-    <Banners />
-    <VideoSlider />
+    <Welcome :data="welcome" />
+    <ProductShowcase :data="categories" />
+    <ProductSlider :data="productSlides" :types="types" />
+    <Banners :data="banners" />
+    <VideoSlider :data="videos" />
     <BottomFeatures />
   </div>
 </template>
@@ -17,6 +17,8 @@ import Banners from '~/components/pages/index/Banners';
 import VideoSlider from '~/components/pages/index/VideoSlider';
 import BottomFeatures from '~/components/pages/index/BottomFeatures';
 
+import {mapState} from 'vuex';
+
 export default {
   components: {
     Welcome,
@@ -26,154 +28,44 @@ export default {
     VideoSlider,
     BottomFeatures
   },
+  head() {
+    return {
+      title: `${this.$t('MetaTitle')}`,
+      meta: [
+        { name: 'description', content: `${this.$t('metaDescription')}` || '' },
+        { property: 'og:title', content: `${this.$t('MetaTitle')}` || '' } ,
+        { property: 'og:description', content: `${this.$t('metaDescription')}` || '' } ,
+        { property: 'og:image', content: '/seo/seo.jpg' || '' } ,
+        { property: 'og:url', content: `https://mobitek.az/${this.$route.fullPath}` || '' } ,
+        { property: 'twitter:card', content: '/seo/seo.jpg' || '' } ,
+        { name: 'keywords', content: `${this.$t('keywords')}` || '' },
+      ]
+    }
+  },
+  async fetch({store}) {
+    await store.dispatch('getSlides');
+    await store.dispatch('getBanners');
+    await store.dispatch('getVideos');
+    await store.dispatch('getCategories');
+  },
+
+  async created() {
+    await this.$store.dispatch('getProductsSlides', {
+      lang: this.$i18n.locale,
+      type: this.types[1].type
+    });
+  },
+
+  computed: {
+    ...mapState(['welcome','banners','videos','productSlides', 'categories'])
+  },
 
   data() {
     return {
-      welcomePics: [
-        {
-          pic: 'pics/img/index/bg.png',
-          title: 'Charge Everything Faster'
-        },
-        {
-          pic: 'pics/img/index/bg.png',
-          title: 'Stay Smart at Home'
-        },
-        {
-          pic: 'pics/img/index/bg.png',
-          title: 'Charge While You Call'
-        }
-      ],
-
-      products: [
-        {
-          title: 'Best Sellers',
-          products: [
-            {
-              reviews: 79,
-              title: 'PD Pioneer 20000mAh Portable Charger',
-              description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
-              rating: 5,
-              pic: 'pics/img/index/p1.png',
-              link: '/product/xz',
-              price: 45
-            },
-            {
-              reviews: 79,
-              title: 'Anker PowerWave Pad & Stand 7.5W',
-              description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
-              rating: 5,
-              pic: 'pics/img/index/p2.png',
-              link: '/product/xz',
-              price: 45
-            },
-            {
-              reviews: 79,
-              title: 'Anker PowerPort Speed PD 5',
-              description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
-              rating: 5,
-              pic: 'pics/img/index/p3.png',
-              link: '/product/xz',
-              price: 45,
-              editorsChoice: true
-            },
-            {
-              reviews: 79,
-              title: 'Baseus Encok True Wireless Earphones W07',
-              description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
-              rating: 5,
-              pic: 'pics/img/index/p4.png',
-              link: '/product/xz',
-              price: 45
-            }
-          ]
-        },
-        {
-          title: 'Top rated products',
-          products: [
-            {
-              reviews: 79,
-              title: 'PD Pioneer 20000mAh Portable Charger',
-              description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
-              rating: 5,
-              pic: 'pics/img/index/p1.png',
-              link: '/product/xz',
-              price: 45
-            },
-            {
-              reviews: 79,
-              title: 'Anker PowerWave Pad & Stand 7.5W',
-              description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
-              rating: 3,
-              pic: 'pics/img/index/p2.png',
-              link: '/product/xz',
-              price: 45
-            },
-            {
-              reviews: 79,
-              title: 'Anker PowerPort Speed PD 5',
-              description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
-              rating: 2,
-              pic: 'pics/img/index/p3.png',
-              link: '/product/xz',
-              price: 45,
-              editorsChoice: true
-            },
-            {
-              reviews: 79,
-              title: 'Baseus Encok True Wireless Earphones W07',
-              description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
-              rating: 4,
-              pic: 'pics/img/index/p4.png',
-              link: '/product/xz',
-              price: 45
-            }
-          ]
-        },
-        {
-          title: 'Editors’ Choices',
-          products: [
-            {
-              reviews: 79,
-              title: 'PD Pioneer 20000mAh Portable Charger',
-              description: 'Substantial 60W PD output means it can charge your MacBook Pro perfectly, just as good as the original charger',
-              rating: 5,
-              pic: 'pics/img/index/p1.png',
-              link: '/product/xz',
-              price: 45,
-              editorsChoice: true
-            },
-            {
-              reviews: 79,
-              title: 'Anker PowerWave Pad & Stand 7.5W',
-              description: 'Qi-Certified 7.5W for iPhone Xs Max XR XS X 8/8 Plus, 10W Fast Charging Samsungs',
-              rating: 5,
-              pic: 'pics/img/index/p2.png',
-              link: '/product/xz',
-              price: 45,
-              editorsChoice: true
-            },
-            {
-              reviews: 79,
-              title: 'Anker PowerPort Speed PD 5',
-              description: 'Premium 60W 5-Port Desktop Charger with One 30W Power Delivery',
-              rating: 5,
-              pic: 'pics/img/index/p3.png',
-              link: '/product/xz',
-              price: 45,
-              editorsChoice: true
-            },
-            {
-              reviews: 79,
-              title: 'Baseus Encok True Wireless Earphones W07',
-              description: 'Automatic Switching of Primary and Secondary Earphone;Dual Mic noise reduction design',
-              rating: 5,
-              pic: 'pics/img/index/p4.png',
-              link: '/product/xz',
-              price: 45,
-              editorsChoice: true
-            }
-          ]
-        }
+      types: [
+        {type: 'top_rated', name: 'index.product-slider.top-rated'},
+        {type: 'best_sellers', name: 'index.product-slider.best-sellers'},
+        {type: 'editor_choice', name: 'index.product-slider.editors-choice'}
       ]
     }
   }

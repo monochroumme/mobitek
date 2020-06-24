@@ -11,6 +11,11 @@
 		flex-wrap: wrap;
 	}
 
+	&__map {
+		width: 100%;
+		height: 700px;
+	}
+
 	&__locations {
 		h2 {
 			font-weight: normal;
@@ -29,25 +34,175 @@
 
 		.store-card {
 			&__top {
-				.bg {
-					height: 155px;
-				}
-
 				.logo {
 					width: 34px;
 					height: 52px;
 					left: 26px;
 				}
+
 				.title {
 					font-size: 50px;
 					line-height: 83px;
 					font-weight: normal;
+				}
+
+				.bg {
+					&.small {
+						display: none;
+					}
 				}
 			}
 
 			&__bottom {
 				padding-top: 134px;
 			}
+		}
+	}
+}
+
+@media (max-width: 1400px) {
+	.contacts-page {
+		&__content {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+
+		&__quadro {
+			flex-direction: column;
+		}
+
+		&__card-big {
+			width: 730px;
+
+			.store-card {
+				&__top {
+					.bg {
+						display: block;
+
+						&.tiny {
+							display: none;
+						}
+					}
+
+					.logo {
+						left: 12px;
+						height: 40px;
+					}
+
+					.title {
+						font-weight: bold;
+						font-size: 33px;
+						line-height: 55px;
+					}
+				}
+			}
+		}
+
+		&__map {
+			height: 600px;
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+	.contacts-page {
+		&__map {
+			height: 500px;
+		}
+	}
+}
+
+@media (max-width: 1000px) {
+	.contacts-page {
+		&__card-big {
+			width: 520px;
+
+			.store-card {
+				&__top {
+					.bg {
+						display: none;
+
+						&.small {
+							display: block;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 900px) {
+	.contacts-page {
+		padding-bottom: 70px;
+
+		&__locations {
+			h2 {
+				font-size: 24px;
+				line-height: 28px;
+				margin-bottom: 20px;
+			}
+		}
+
+		&__map {
+			height: 400px;
+		}
+
+		&__card-big {
+			margin-bottom: 70px;
+		}
+	}
+}
+
+@media (max-width: 750px) {
+	.contacts-page {
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+
+@media (max-width: 560px) {
+	.contacts-page {
+		&__content {
+			padding-bottom: 20px;
+		}
+
+		&__card-big {
+			width: 320px;
+			
+			.store-card {
+				&__top {
+					.title {
+						font-size: 27px;
+						line-height: 45px;
+					}
+
+					.bg {
+						display: none;
+
+						&.tiny {
+							display: block;
+						}
+					}
+				}
+
+				&__bottom {
+					padding-top: 90px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 400px) {
+	.contacts-page {
+		&__content {
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		&__card-big {
+			margin-bottom: 70px;
 		}
 	}
 }
