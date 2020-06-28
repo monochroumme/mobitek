@@ -97,7 +97,8 @@
 					}
 
 					span {
-						font-weight: 600;
+						color: $color-yellow;
+						box-shadow: 0 2px 5px #FAFA00;
 					}
 				}
 
@@ -1071,7 +1072,15 @@ body.touch {
 		 			}
 		 		}
 		 	}
-		 }
+		}
+
+		&__product-slider {
+			&__card {
+				&:hover {
+					box-shadow: none;
+				}
+			}
+		}
 
 		&__video-slider {
 			.channel-button {

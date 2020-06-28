@@ -102,13 +102,91 @@ export default {
 			mobileMenuBgActive: false,
 			mobileMenuBgVisible: false,
 
-			searchInput: ''
+			searchInput: '',
+
+			mobileMenuTransform: 'transform .2s ease',
+			mobileMenuOrientationChangeWidth: 400
 		}
 	},
 
 	mounted() {
 		window.addEventListener('scroll', this.onScroll, false);
 		this.onScroll();
+
+		let mobileMenuCloser = document.querySelector('.header__mobile__menu__close'),
+				mobileMenu = document.querySelector('.header__mobile__menu'),
+				drag = false,
+				curLoc = 0,
+				startLoc = 0;
+
+		let onMouseMove = e => {
+			if (drag) {
+				if (window.innerWidth > this.mobileMenuOrientationChangeWidth)
+					curLoc = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+				else
+					curLoc = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+
+				curLoc -= startLoc;
+
+				if (curLoc > 0)
+					curLoc = 0;
+				
+				if (window.innerWidth > this.mobileMenuOrientationChangeWidth)
+					mobileMenu.style.transform = `translateX(${curLoc}px)`;
+				else
+					mobileMenu.style.transform = `translateY(${curLoc}px)`;
+			}
+		};
+
+		let onMouseUp = e => {
+			if (!drag) return;
+
+			if (window.innerWidth > this.mobileMenuOrientationChangeWidth && curLoc < -mobileMenu.getBoundingClientRect().width / 4) {
+				mobileMenu.style.transition = '';
+				setTimeout(() => {
+					mobileMenu.style.transform = '';
+					this.hideMobileMenu();
+				}, 1);
+			} else if (window.innerWidth <= this.mobileMenuOrientationChangeWidth && curLoc < -mobileMenu.getBoundingClientRect().height / 4) {
+				mobileMenu.style.transition = '';
+				setTimeout(() => {
+					mobileMenu.style.transform = '';
+					this.hideMobileMenu();
+				}, 1);
+			} else {
+				mobileMenu.style.transition = '';
+				setTimeout(() => {
+					mobileMenu.style.transform = '';
+				}, 1);
+			}
+
+			drag = false;
+		};
+
+		let onCloser = e => {
+			e.preventDefault();
+			mobileMenu.style.transition = 'none';
+			if (window.innerWidth > this.mobileMenuOrientationChangeWidth) {
+				startLoc = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+				startLoc -= mobileMenu.getBoundingClientRect().x;
+			} else {
+				startLoc = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+				startLoc -= mobileMenu.getBoundingClientRect().y;
+			}
+			drag = true;
+		};
+
+		mobileMenuCloser.addEventListener('mousedown', e => {
+			onCloser(e);
+		});
+		mobileMenuCloser.addEventListener('touchstart', e => {
+			onCloser(e);
+		});
+
+		window.addEventListener('mousemove', onMouseMove, false);
+		window.addEventListener('touchmove', onMouseMove, false);
+		window.addEventListener('mouseup', onMouseUp, false);
+		window.addEventListener('touchend', onMouseUp, false);
 	},
 
 	methods: {

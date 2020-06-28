@@ -323,6 +323,8 @@
 						width: 100%;
 						padding: 20px 0;
 						background: $color-dark;
+						overflow-y: auto;
+						max-height: calc(100vh - 180px);
 
 						li {
 							a {
@@ -356,6 +358,15 @@
 		&__logo {
 			width: 135px;
 			height: 68px;
+		}
+
+		&__middle {
+			&.mobile {
+		    width: 135px;
+		    height: 68px;
+		    top: 0;
+		    transform: translate(-50%, 0);
+			}
 		}
 
 		&__search {
@@ -410,6 +421,7 @@
 
 					ul {
 						padding-top: 55px;
+						max-height: calc(100vh - 196px);
 
 						li {
 							a {
