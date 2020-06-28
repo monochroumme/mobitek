@@ -176,6 +176,15 @@ export default {
       this.searchInput = searchInput;
       this.updateQuery();
     });
+
+    let stateCheck = setInterval(() => {
+      if (document.readyState === 'complete') {
+        clearInterval(stateCheck);
+        // document ready
+        this.$bus.$emit('setMin', this.minPrice);
+        this.$bus.$emit('setMax', this.maxPrice);
+      }
+    }, 100);
   },
 
   computed: {
@@ -269,12 +278,10 @@ export default {
 
       if (this.$route.query.min_price) {
         this.minPrice = this.$route.query.min_price;
-        this.$bus.$emit('setMin', this.minPrice);
       }
 
       if (this.$route.query.max_price) {
         this.maxPrice = this.$route.query.max_price;
-        this.$bus.$emit('setMax', this.maxPrice);
       }
 
       if (this.$route.query.order == 'asc')
@@ -366,6 +373,9 @@ export default {
         window.removeEventListener('resize', this.onResize, false);
         return;
       }
+
+      if (this.$bus.isMobile)
+        return;
 
       if (window.innerWidth > 650) {
         if (!this.mobileFiltersShown)
