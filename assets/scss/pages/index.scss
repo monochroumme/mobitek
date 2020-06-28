@@ -98,7 +98,6 @@
 
 					span {
 						color: $color-yellow;
-						box-shadow: 0 2px 5px #FAFA00;
 					}
 				}
 
@@ -110,7 +109,7 @@
 					border-radius: 50%;
 					@include flex-center;
 
-					img {
+					img, .bodymovin {
 						height: 43px;
 						object-fit: contain;
 					}
@@ -870,7 +869,7 @@
 						width: 64px;
 						height: 64px;
 
-						img {
+						img, .bodymovin {
 							height: 32px;
 						}
 					}
@@ -991,7 +990,7 @@
 						width: 50px;
 						height: 50px;
 
-						img {
+						img, .bodymovin {
 							width: 25px;
 							height: 25px;
 						}
