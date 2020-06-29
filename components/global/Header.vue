@@ -130,6 +130,7 @@
 									</button>
 								</div>
 							</div>
+							<div class="header__cart__outer__bg" @click="toggleCart()"></div>
 						</div>
 					</div>
 					<div class="header__langs desktop-500">
