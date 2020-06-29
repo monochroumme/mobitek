@@ -1,0 +1,29 @@
+.text-page {
+	width: 100%;
+	max-width: 800px;
+	min-height: calc(100vh - 154px - 245px - 80px);
+	background: white;
+	border-radius: 35px;
+	padding: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 80px;
+}
+
+@media (max-width: 1100px) {
+	.text-page {
+		min-height: calc(100vh - 154px - 80px - 417px);
+	}
+}
+
+@media (max-width: 800px) {
+	.text-page {
+		border-radius: 0;
+	}
+}
+
+@media (max-width: 750px) {
+	.text-page {
+		min-height: calc(100vh - 154px - 80px - 579px);
+	}
+}

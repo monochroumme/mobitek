@@ -12,8 +12,8 @@ export default {
 		return {
 			preloaderShown: true,
 			bounceDuration: 750,
-			sonicScaleDuration: 400,
-			fadeDuration: 750
+			sonicScaleDuration: 500,
+			fadeDuration: 500
 		}
 	},
 
@@ -22,17 +22,21 @@ export default {
       preloader = this.$el;
 
     window.onNuxtReady(app => {
-    	setTimeout(() => {
-      	this.bounce(logo, 1, 2, (scale) => {
-      		this.sonicScale(logo, scale, () => {
-      			this.fade(preloader, 1, 0, () => {
-      				setTimeout(() => {
-      					this.preloaderShown = false;
-      				}, 1);
-      			});
-      		});
-      	});
-    	}, 1000);
+      let stateCheck = setInterval(() => {
+        if (document.readyState === 'complete') {
+          clearInterval(stateCheck);
+        	setTimeout(() => {
+          	this.bounce(logo, 1, 2, (scale) => {
+          		this.sonicScale(logo, scale);
+        			this.fade(preloader, 1, 0, () => {
+        				setTimeout(() => {
+        					this.preloaderShown = false;
+        				}, 1);
+          		});
+          	});
+        	}, 500);
+        }
+      }, 100);
     });
   },
 
@@ -67,7 +71,7 @@ export default {
       animate(animate);
     },
 
-    sonicScale(scalee, from, callback) {
+    sonicScale(scalee, from) {
     	let to = window.innerWidth / scalee.offsetWidth * 8,
     			duration = this.sonicScaleDuration, // ms
 	        start = new Date().getTime(),
@@ -82,8 +86,6 @@ export default {
           curChange = newChange;
           scalee.style.transform = `scale(${from + (from < to ? curChange : -curChange)})`;
           window.requestAnimationFrame(animate);
-        } else {
-        	callback();
         }
       }
       animate();

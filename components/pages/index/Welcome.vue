@@ -39,10 +39,17 @@ export default {
       this.activeIndex = this.mySwiper.activeIndex;
 
       // bottom items scroll when a small screen
-      bottom.scrollTo({
-        left: bottom.scrollLeft + this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().x - this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().width/3,
-        behavior: 'smooth'
-      });
+      if (window.innerWidth > 600) {
+        bottom.scrollTo({
+          left: bottom.scrollLeft + this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().x - this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().width/3,
+          behavior: 'smooth'
+        });
+      } else {
+        bottom.scrollTo({
+          left: bottom.scrollLeft + this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().x,
+          behavior: 'smooth'
+        });
+      }
     });
 
     this.mySwiper.init();
@@ -69,7 +76,6 @@ export default {
           });
           el.addEventListener('mousemove', (e) => {
             if (!isDown) return;
-          	console.log('hey');
             e.preventDefault();
             const x = e.pageX - el.offsetLeft;
             const walk = (x - startX); //scroll-fast

@@ -7,8 +7,8 @@
 	},
 
 	"footer": {
-		"home": "Information",
-		"information": "Home",
+		"home": "Home",
+		"information": "Information",
 		"catalog": "Catalog",
 		"about-us": "About us",
 		"contacts-us": "Contact us",
@@ -102,14 +102,21 @@
 		"buy-now": "BUY NOW",
 		"also-buy": "You can also buy"
 	},
+
 	"MetaTitle": "Mobitek.az | Accessories & Gadgets",
-    "metaDescription": "We proudly provide WHOLESALE and RETAIL sales of products such as Speakers, Headphones, Powerbanks and etc. with well made HIGH QUALITY at AFFORDABLE PRICES which belong to the well-known Brands from all over the World",
-    "keywords":"powerbank,powerbanks,adapter,charger,wireless,wirelesscharger,car,caraccesories,phone,smartphone,gadgets,home,game,videogame,videogames,wire,gaming,ps4,ps3,playstation,carcharger,adapters,case,cases,screenprotectors,screenprotector,cable,cables,speaker,speakers,JBL,marshall,,mobitek,mobitekaz,mobitekazerbaijan,mobitel,mi,powerology,mfi,apple,xiaomi,anker,ravpower,audio,headphone,earphone,headphones,devia,rock,joyroom",
+  "metaDescription": "We proudly provide WHOLESALE and RETAIL sales of products such as Speakers, Headphones, Powerbanks and etc. with well made HIGH QUALITY at AFFORDABLE PRICES which belong to the well-known Brands from all over the World",
+  "keywords":"powerbank,powerbanks,adapter,charger,wireless,wirelesscharger,car,caraccesories,phone,smartphone,gadgets,home,game,videogame,videogames,wire,gaming,ps4,ps3,playstation,carcharger,adapters,case,cases,screenprotectors,screenprotector,cable,cables,speaker,speakers,JBL,marshall,,mobitek,mobitekaz,mobitekazerbaijan,mobitel,mi,powerology,mfi,apple,xiaomi,anker,ravpower,audio,headphone,earphone,headphones,devia,rock,joyroom",
+	
 	"validate": {
 		"chosenColor": "Colors are not selected",
 		"notAll": "Not all required sections filled",
 		"success": "Your application is accepted",
 		"writeUs": "Thanks for subscribe",
 		"notWriteUs": "Mail can't be empty"
+	},
+
+	"cart": {
+		"title": "Cart",
+		"order": "Order"
 	}
 }
