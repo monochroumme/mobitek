@@ -2,7 +2,7 @@
 	<div class="index-page__video-slider">
 		<div class="channel-button">
 			<a href="https://www.youtube.com/channel/UCRKa8kSU_RESveKfNNLpt5A" target="_blank">
-				<img class="hover" src="~/static/pics/svg/index/youtube.png" alt="Youtube: Mobitek TV">
+				<img class="hover" src="~/static/pics/img/index/youtube.png" alt="Youtube: Mobitek TV">
 				<img class="no-hover" src="~/static/pics/svg/index/youtube-hover.svg" alt="Youtube: Mobitek TV">
 			</a>
 		</div>
