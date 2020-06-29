@@ -13,9 +13,30 @@
 						<img src="/pics/img/header/mobile-menu-button.png">
 					</button>
 					<div class="header__mobile__menu" :class="{active: mobileMenuShown}">
-						<a href="/" @click.prevent="mobileLink('/')" class="header__mobile__menu__logo" v-body-scroll-lock="mobileMenuShown">
-							<img src="/pics/svg/header/logo-raw.svg">
-						</a>
+						<div class="header__mobile__menu__logo" v-body-scroll-lock="mobileMenuShown">
+							<a href="/" @click.prevent="mobileLink('/')">
+								<img src="/pics/svg/header/logo-raw.svg">
+							</a>
+							<div class="header__mobile__menu__logo__side">
+								<button class="header__mobile__menu__logo__side__cart" @click="toggleCart()">
+									<img src="/pics/img/header/cart.png">
+								</button>
+								<div class="header__langs">
+									<button class="header__langs__button" @click="langsShown = !langsShown">
+										<img alt="Languages" src="/pics/img/header/langs.png">
+									</button>
+									<div class="header__langs__outer">
+										<div class="header__langs__inner" :class="{active: langsShown}">
+											<div class="header__langs__wrapper">
+												<button class="header__langs__item" @click="chooseLang('ru')">RU</button>
+												<button class="header__langs__item" @click="chooseLang('az')">AZ</button>
+												<button class="header__langs__item" @click="chooseLang('en')">EN</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="header__mobile__menu__content">
 							<ul>
 								<li>
@@ -54,7 +75,7 @@
 					</ul>
 				</nav>
 				<div class="header__middle mobile">
-					<clink to="/" class="header__logo" :class="{ active: searchBarShown }">
+					<clink to="/" class="header__logo" :class="{ active: searchBarShown || isCartShown() }">
 						<img src="~/static/pics/svg/header/logo.svg">
 					</clink>
 				</div>
@@ -67,6 +88,46 @@
 							<div class="header__search__inner" :class="{active: searchBarShown}">
 								<div class="header__search__wrapper">
 									<input type="text" name="search" v-model="searchInput" @keydown.enter="search()">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="header__cart" :class="{aside: langsShown, active: cartShown}">
+						<button class="header__cart__button" @click="toggleCart()">
+							<img alt="Search" src="/pics/img/header/cart.png">
+						</button>
+						<div class="header__cart__outer" :class="{active: cartShown}">
+							<div class="header__cart__inner">
+								<div class="header__cart__wrapper">
+									<h3 class="header__cart__title">{{ $t('cart.title') }}</h3>
+									<div class="header__cart__line"></div>
+									<div class="header__cart__content">
+										<div class="header__cart__item" v-for="(item, i) in cart" :key="i">
+											<clink to="/" class="header__cart__item__left">
+												<img :src="item.pic">
+											</clink>
+											<div class="header__cart__item__middle">
+												<clink to="/" class="header__cart__item__title">{{ item.title }}</clink>
+												<div class="header__cart__item__amount">
+													<button @click="increaseAmount(i)">
+														<img src="/pics/svg/header/plus.svg">
+													</button>
+													<input type="number" name="amount" :value="cartItemAmounts[i]" @input="setAmount(i, $event.target.value)">
+													<button @click="decreaseAmount(i)">
+														<img src="/pics/svg/header/minus.svg">
+													</button>
+												</div>
+											</div>
+											<div class="header__cart__item__right">
+												<div class="header__cart__item__price">
+													<span>{{ item.price }}</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<button class="header__cart__order">
+										<span>{{ $t('cart.order') }}</span>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -93,10 +154,13 @@
 
 <script>
 export default {
+	props: ['cart'],
+
 	data() {
 		return {
 			searchBarShown: false,
 			langsShown: false,
+			cartShown: false,
 			transparent: false,
 			mobileMenuShown: false,
 			mobileMenuBgActive: false,
@@ -105,19 +169,23 @@ export default {
 			searchInput: '',
 
 			mobileMenuTransform: 'transform .2s ease',
-			mobileMenuOrientationChangeWidth: 400
+			mobileMenuOrientationChangeWidth: 400,
+
+			cartItemAmounts: new Array(this.cart.length).fill(1)
 		}
 	},
 
 	mounted() {
 		window.addEventListener('scroll', this.onScroll, false);
+		window.addEventListener('resize', this.onResize, false);
 		this.onScroll();
 
 		let mobileMenuCloser = document.querySelector('.header__mobile__menu__close'),
 				mobileMenu = document.querySelector('.header__mobile__menu'),
 				drag = false,
 				curLoc = 0,
-				startLoc = 0;
+				startLoc = 0,
+				touchStartTime = 0;
 
 		let onMouseMove = e => {
 			if (drag) {
@@ -157,6 +225,9 @@ export default {
 				mobileMenu.style.transition = '';
 				setTimeout(() => {
 					mobileMenu.style.transform = '';
+					if (new Date() - touchStartTime < 199) {
+						this.hideMobileMenu();
+					}
 				}, 1);
 			}
 
@@ -166,6 +237,7 @@ export default {
 		let onCloser = e => {
 			e.preventDefault();
 			mobileMenu.style.transition = 'none';
+			touchStartTime = new Date();
 			if (window.innerWidth > this.mobileMenuOrientationChangeWidth) {
 				startLoc = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
 				startLoc -= mobileMenu.getBoundingClientRect().x;
@@ -190,6 +262,12 @@ export default {
 	},
 
 	methods: {
+		isCartShown() {
+			if (process.browser && window && window.innerWidth <= 890 && this.cartShown)
+				return true;
+			return false;
+		},
+
 		search() {
 			if (this.searchBarShown && this.searchInput.trim().length > 0) {
 				if (this.$route.path.toLowerCase() != '/catalog' && this.$route.path.toLowerCase() != '/catalog/' + this.$i18n.locale)
@@ -198,6 +276,24 @@ export default {
 			}
 			this.searchBarShown = !this.searchBarShown;
 			this.searchInput = '';
+		},
+
+		toggleCart() {
+			this.cartShown = !this.cartShown;
+		},
+
+		increaseAmount(i) {
+			this.setAmount(i, this.cartItemAmounts[i]+1);
+		},
+
+		decreaseAmount(i) {
+			this.setAmount(i, this.cartItemAmounts[i]-1);
+		},
+
+		setAmount(i, value) {
+			this.cartItemAmounts[i] = value;
+			this.cartItemAmounts.push({});
+			this.cartItemAmounts.pop();
 		},
 
 		chooseLang(lang) {
@@ -231,6 +327,10 @@ export default {
 		mobileLink(link) {
 			this.hideMobileMenu();
 			this.$router.push(link);
+		},
+
+		onResize() {
+			this.langsShown = false;
 		},
 
 		onScroll() {

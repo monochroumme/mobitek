@@ -284,16 +284,15 @@
 			flex-shrink: 1;
 			box-sizing: content-box;
 
+			&__slide {
+				width: 100%;
+			}
+
 			.swiper-container {
 				height: 100%;
 
 				.swiper-slide {
 					@include flex-center;
-				}
-
-				img {
-					width: 100%;
-					object-fit: contain;
 				}
 			}
 		}
@@ -428,6 +427,7 @@
 		&__sliders {
 			&__right {
 				max-width: 300px;
+				padding: 20px 0;
 			}
 		}
 

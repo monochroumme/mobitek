@@ -181,8 +181,10 @@ export default {
       if (document.readyState === 'complete') {
         clearInterval(stateCheck);
         // document ready
-        this.$bus.$emit('setMin', this.minPrice);
-        this.$bus.$emit('setMax', this.maxPrice);
+        setTimeout(() => {
+          this.$bus.$emit('setMin', this.minPrice);
+          this.$bus.$emit('setMax', this.maxPrice);
+        }, 500);
       }
     }, 100);
   },

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Preloader />
-    <Header />
+    <Header :cart="cart" />
     <nuxt />
     <Footer />
     <GoToTop />
@@ -32,6 +32,41 @@ export default {
         document.body.style.overflow = '';
         document.body.style.background = '';
       }
+      let e = document.querySelector('.vue-back-to-top');
+      if (e && e.click)
+        e.click();
+    }
+  },
+
+  data() {
+    return {
+      cart: [
+        {
+          pic: '/pics/img/product.png',
+          title: 'Anker PowerWave Pad & Stand 7.5W',
+          price: 49
+        },
+        {
+          pic: '/pics/img/product.png',
+          title: 'Anker PowerWave Pad & Stand 7.5W',
+          price: 49
+        },
+        {
+          pic: '/pics/img/product.png',
+          title: 'Anker PowerWave Pad & Stand 7.5W',
+          price: 49
+        },
+        {
+          pic: '/pics/img/product.png',
+          title: 'Anker PowerWave Pad & Stand 7.5W',
+          price: 49
+        },
+        {
+          pic: '/pics/img/product.png',
+          title: 'Anker PowerWave Pad & Stand 7.5W',
+          price: 49
+        }
+      ]
     }
   },
 
