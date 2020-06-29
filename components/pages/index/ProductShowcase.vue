@@ -4,8 +4,7 @@
 			<div class="index-page__product-showcase__card__content">
 				<a :href="`/catalog?cat=${cat.id}`" class="index-page__product-showcase__card__item" v-for="(cat,i) in data" :key="i" :class="{active: cat.id == chosen}" @click.prevent="chooseCat(cat.id)">
 					<div class="index-page__product-showcase__card__item__icon">
-						<img v-if="cat.slug.toLowerCase() != 'car'" :src="`/pics/svg/index/ps-${cat.slug.toLowerCase()}.svg`" :alt="cat.title[$i18n.locale]">
-						<div v-else class="bodymovin" :data-icon="`/animations/${cat.slug.toLowerCase()}/anim.json`"></div>
+						<div class="bodymovin" :data-icon="`/animations/${cat.slug.toLowerCase()}/anim.json`"></div>
 					</div>
 					<span>{{ cat.title[$i18n.locale] }}</span>
 				</a>
@@ -21,10 +20,9 @@ export default {
 	props: ['data', 'chosen'],
 
 	mounted() {
-		let bodymovins = document.querySelectorAll('.bodymovin'),
-			animation;
+		let bodymovins = document.querySelectorAll('.bodymovin');
 		bodymovins.forEach(e => {
-			animation = lottie.loadAnimation({
+			let animation = lottie.loadAnimation({
 				container: e,
 				renderer: 'svg',
 				loop: false,
