@@ -25,7 +25,7 @@
 									<button class="header__langs__button">
 										<img alt="Languages" src="/pics/img/header/langs.png">
 									</button>
-									<div class="header__langs__outer">
+									<div class="header__langs__outer" v-show="langsOuterShown">
 										<div class="header__langs__inner" :class="{active: langsShown}">
 											<div class="header__langs__wrapper">
 												<button class="header__langs__item" @click="chooseLang('ru')">RU</button>
@@ -96,7 +96,7 @@
 						<button class="header__cart__button" @click="toggleCart()">
 							<img alt="Search" src="/pics/img/header/cart.png">
 						</button>
-						<div class="header__cart__outer" :class="{active: cartShown}" v-show="false">
+						<div class="header__cart__outer" :class="{active: cartShown}" v-show="cartOuterShown">
 							<div class="header__cart__inner">
 								<div class="header__cart__wrapper">
 									<h3 class="header__cart__title">{{ $t('cart.title') }}</h3>
@@ -163,6 +163,7 @@ export default {
 			langsShown: false,
 			langsOuterShown: false,
 			cartShown: false,
+			cartOuterShown: false,
 			transparent: false,
 			mobileMenuShown: false,
 			mobileMenuBgActive: false,
@@ -291,7 +292,16 @@ export default {
 		},
 
 		toggleCart() {
-			this.cartShown = !this.cartShown;
+			if (!this.cartShown) {
+				this.cartOuterShown = true;
+				setTimeout(() => { this.cartShown = true; }, 1);
+			} else {
+				this.cartShown = false;
+				setTimeout(() => {
+					if (!this.cartShown)
+						this.cartOuterShown = false;
+				}, 300);
+			}
 		},
 
 		increaseAmount(i) {
@@ -321,7 +331,10 @@ export default {
 				setTimeout(() => { this.langsShown = true; }, 1);
 			} else {
 				this.langsShown = false;
-				setTimeout(() => { this.langsOuterShown = false; }, 300);
+				setTimeout(() => {
+					if (!this.langsShown)
+						this.langsOuterShown = false;
+				}, 300);
 			}
 		},
 
