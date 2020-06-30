@@ -84,7 +84,7 @@
 						<button class="header__search__button" @click="search()">
 							<img alt="Search" src="/pics/img/header/search.png">
 						</button>
-						<div class="header__search__outer">
+						<div class="header__search__outer" v-show="searchOuterShown">
 							<div class="header__search__inner" :class="{active: searchBarShown}">
 								<div class="header__search__wrapper">
 									<input type="text" name="search" v-model="searchInput" @keydown.enter="search()">
@@ -160,6 +160,7 @@ export default {
 	data() {
 		return {
 			searchBarShown: false,
+			searchOuterShown: false,
 			langsShown: false,
 			langsOuterShown: false,
 			cartShown: false,
@@ -277,8 +278,18 @@ export default {
 					this.$router.push(`/catalog?title=${this.searchInput}`);
 				else this.$bus.$emit('search', this.searchInput);
 			}
-			this.searchBarShown = !this.searchBarShown;
-			this.searchInput = '';
+			if (!this.searchBarShown) {
+				this.searchOuterShown = true;
+				setTimeout(() => { this.searchBarShown = true; }, 1);
+			} else {
+				this.searchBarShown = false;
+				setTimeout(() => {
+					if (!this.searchBarShown) {
+						this.searchOuterShown = false;
+						this.searchInput = '';
+					}
+				}, 300);
+			}
 		},
 
 		toggleCart() {

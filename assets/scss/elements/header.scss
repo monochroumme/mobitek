@@ -10,8 +10,8 @@
 	}
 
 	&--floating {
-		height: 0;
-		margin-bottom: 0;
+		height: 0 !important;
+		margin-bottom: 0 !important;
 	}
 
 	&--transparent {
@@ -473,11 +473,15 @@
 				position: fixed;
 				top: 0;
 				left: 0;
-				transform: translateX(-100%);
 				transition: transform .2s ease;
+				overflow-y: auto;
+				max-height: 100vh;
+				transform: translate3d(-100%,0,0);
+		    -webkit-transform: translate3d(-100%,0,0);
+		    -webkit-overflow-scrolling: touch;
 
 				&.active {
-					transform: translateX(0);
+					transform: translate3d(0,0,0);
 				}
 
 				&__button {
@@ -525,8 +529,6 @@
 						width: 100%;
 						padding: 20px 0;
 						background: $color-dark;
-						overflow-y: auto;
-						max-height: calc(100vh - 180px);
 
 						li {
 							a {
@@ -633,10 +635,6 @@
     		}
 	    }
 
-	    &__order {
-	    	border-radius: 0;
-	    }
-
 	    &__outer {
 	    	width: 100vw;
     		height: 100vh;
@@ -673,8 +671,8 @@
 	    &__wrapper {
 	    	max-height: calc(100vh - 100px);
   			height: 100%;
-  			border-radius: 0;
   			padding-top: 25px;
+  			border-radius: 0 0 18px 18px;
 	    }
 
 	    &__content {
@@ -727,6 +725,8 @@
 			&__menu {
 				width: 100%;
 				transform: translateY(-100%);
+				overflow-y: visible;
+				max-height: unset;
 
 				&.active {
 					transform: translateY(0);
@@ -765,7 +765,10 @@
 
 					ul {
 						padding-top: 55px;
+						overflow-y: auto;
 						max-height: calc(100vh - 196px);
+				    -webkit-transform: translate3d(0,0,0);
+				    -webkit-overflow-scrolling: touch;
 
 						li {
 							a {
