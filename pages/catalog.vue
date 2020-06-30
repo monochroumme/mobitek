@@ -125,7 +125,9 @@ export default {
       chosenColors: [],
       prices: [0, 50, 100, 500, 'inf'],
 
-      category: null
+      category: null,
+
+      windowSize: 0
     }
   },
 
@@ -383,10 +385,14 @@ export default {
         return;
       }
 
-      if (window.innerWidth > 650) {
-        this.showMobileFilters();
-      } else {
-        this.hideMobileFilters();
+      if (this.windowSize != window.innerWidth) {
+        this.windowSize = window.innerWidth;
+
+        if (window.innerWidth > 650) {
+          this.showMobileFilters();
+        } else {
+          this.hideMobileFilters();
+        }
       }
     }
   }
