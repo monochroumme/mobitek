@@ -480,6 +480,16 @@
 					transform: translateX(0);
 				}
 
+				&__button {
+					width: 39px;
+					height: 18px;
+
+					img {
+						width: 100%;
+						height: 100%;
+					}
+				}
+
 				&__logo {
 					background: white;
 					border-radius: 0 35px 0 0;
