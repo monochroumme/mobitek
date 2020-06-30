@@ -32,9 +32,11 @@ export default {
         document.body.style.overflow = '';
         document.body.style.background = '';
       }
-      let e = document.querySelector('.vue-back-to-top');
-      if (e && e.click)
-        e.click();
+      if (n.path.toLowerCase() != o.path.toLowerCase()) {
+        let e = document.querySelector('.vue-back-to-top');
+        if (e && e.click)
+          e.click();
+      }
     }
   },
 

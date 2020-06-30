@@ -99,7 +99,7 @@ export default {
     return {
       searchInput: '',
 
-      mobileFiltersShown: true,
+      mobileFiltersShown: false,
 
       minPrice: 0,
       maxPrice: 500,
@@ -164,9 +164,7 @@ export default {
 
   mounted() {
     window.addEventListener('resize', this.onResize, false);
-    setTimeout(() => {
-      this.onResize();
-    }, 1);
+    this.onResize();
 
     this.chosenColors = new Array(this.colors.length).fill(false);
   	this.readURLQuery();
@@ -360,13 +358,22 @@ export default {
     },
 
     toggleMobileFilters() {
-      this.mobileFiltersShown = !this.mobileFiltersShown;
-
-      let filters = this.$el.querySelector('.catalog-page__filter__inner');
-
       if (this.mobileFiltersShown)
+        this.hideMobileFilters();
+      else this.showMobileFilters();
+    },
+
+    showMobileFilters() {
+      this.mobileFiltersShown = true;
+      let filters = this.$el.querySelector('.catalog-page__filter__inner');
+      if (filters)
         filters.style.height = filters.scrollHeight + 'px';
-      else
+    },
+
+    hideMobileFilters() {
+      this.mobileFiltersShown = false;
+      let filters = this.$el.querySelector('.catalog-page__filter__inner');
+      if (filters)
         filters.style.height = 0;
     },
 
@@ -376,16 +383,10 @@ export default {
         return;
       }
 
-      if (this.$bus.isMobile)
-        return;
-
       if (window.innerWidth > 650) {
-        if (!this.mobileFiltersShown)
-          this.mobileFiltersShown = true;
-        this.$el.querySelector('.catalog-page__filter__inner').style.height = '';
+        this.showMobileFilters();
       } else {
-        if (this.mobileFiltersShown)
-          this.toggleMobileFilters();
+        this.hideMobileFilters();
       }
     }
   }
