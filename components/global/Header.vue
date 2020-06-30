@@ -22,7 +22,7 @@
 									<img src="/pics/img/header/cart.png">
 								</button>
 								<div class="header__langs">
-									<button class="header__langs__button" @click="langsShown = !langsShown">
+									<button class="header__langs__button">
 										<img alt="Languages" src="/pics/img/header/langs.png">
 									</button>
 									<div class="header__langs__outer">
@@ -255,6 +255,16 @@ export default {
 		mobileMenuCloser.addEventListener('touchstart', e => {
 			onCloser(e);
 		});
+
+		if (this.$bus.isMobile) {
+			document.querySelector('.header__mobile__menu__logo__side .header__langs__button').addEventListener('touchstart', e => {
+				this.langsShown = !this.langsShown;
+			});
+		} else {
+			document.querySelector('.header__mobile__menu__logo__side .header__langs__button').addEventListener('click', e => {
+				this.langsShown = !this.langsShown;
+			});
+		}
 
 		window.addEventListener('mousemove', onMouseMove, false);
 		window.addEventListener('touchmove', onMouseMove, false);
