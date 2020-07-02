@@ -33,7 +33,7 @@
 
 <script>
 export default {
-	props: ['data'],
+	props: ['data', 'sliderNumber'],
 
 	data() {
 		return {
@@ -45,25 +45,31 @@ export default {
 				observeParents: true,
 				centeredSlides: true,
 				init: false,
+				navigation: {
+        	nextEl: `.index-page__product-slider__arrow-right--${this.sliderNumber}`,
+					prevEl: `.index-page__product-slider__arrow-left--${this.sliderNumber}`
+        },
 
 				breakpoints: {
 					1151: {
 						spaceBetween: 25,
 						slidesPerView: 4,
+						loopedSlides: 4,
 						centeredSlides: false
 					},
 					901: {
 						spaceBetween: 25,
 						slidesPerView: 3,
+						loopedSlides: 3,
 						centeredSlides: false
 					},
 					651: {
 						spaceBetween: 25,
 						slidesPerView: 2,
+						loopedSlides: 2,
 						centeredSlides: false
 					},
 					451: {
-						spaceBetween: 25,
 						spaceBetween: 25,
 						slidesPerView: 'auto',
 						centeredSlides: true
@@ -79,14 +85,6 @@ export default {
     });
 
     this.productSwiper.init(this.productSwiperOption);
-
-		this.$bus.$on('product-slide', data => {
-			if (data.index == this.index) {
-				if (data.left)
-					this.productSwiper.slidePrev();
-				else this.productSwiper.slideNext();
-			}
-		});
 	},
 
 	methods: {

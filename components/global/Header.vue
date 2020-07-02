@@ -103,29 +103,37 @@
 									<div class="header__cart__line"></div>
 									<div class="header__cart__content">
 										<div class="header__cart__item" v-for="(item, i) in cart" :key="i">
-											<clink to="/" class="header__cart__item__left">
-												<img :src="item.pic">
-											</clink>
-											<div class="header__cart__item__middle">
-												<clink to="/" class="header__cart__item__title">{{ item.title }}</clink>
-												<div class="header__cart__item__amount">
-													<button @click="increaseAmount(i)">
-														<img src="/pics/svg/header/plus.svg">
-													</button>
-													<input type="number" name="amount" :value="cartItemAmounts[i]" @input="setAmount(i, $event.target.value)">
-													<button @click="decreaseAmount(i)">
-														<img src="/pics/svg/header/minus.svg">
-													</button>
-												</div>
+											<div class="header__cart__item__colors">
+												<div class="header__cart__item__colors__item" v-for="(color, k) in item.colors" :key="k" :style="{background: color}" :class="{chosen: color == item.color}"></div>
 											</div>
-											<div class="header__cart__item__right">
-												<div class="header__cart__item__price">
-													<span>{{ item.price }}</span>
+											<div class="header__cart__item__content">
+												<clink to="/" class="header__cart__item__left">
+													<img :src="item.pic">
+												</clink>
+												<div class="header__cart__item__middle">
+													<clink to="/" class="header__cart__item__title">{{ item.title }}</clink>
+													<div class="header__cart__item__amount">
+														<button @click="decreaseAmount(item.index, item.amount)">
+															<img src="/pics/svg/header/minus.svg">
+														</button>
+														<input type="number" name="amount" :value="item.amount" @input="setAmount(item.index, $event.target.value)">
+														<button @click="increaseAmount(item.index, item.amount)">
+															<img src="/pics/svg/header/plus.svg">
+														</button>
+													</div>
+												</div>
+												<div class="header__cart__item__right">
+													<div class="header__cart__item__price">
+														<span>{{ item.price }} azn</span>
+													</div>
+													<div class="header__cart__item__remove" @click="removeOrder(item.index)">
+														<img src="/pics/svg/header/cross.svg">
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-									<button class="header__cart__order">
+									<button class="header__cart__order" v-if="cart.length > 0">
 										<span>{{ $t('cart.order') }}</span>
 									</button>
 								</div>
@@ -154,9 +162,9 @@
 </template>
 
 <script>
-export default {
-	props: ['cart'],
+import {mapActions} from 'vuex';
 
+export default {
 	data() {
 		return {
 			searchBarShown: false,
@@ -175,7 +183,7 @@ export default {
 			mobileMenuTransform: 'transform .2s ease',
 			mobileMenuOrientationChangeWidth: 400,
 
-			cartItemAmounts: new Array(this.cart.length).fill(1)
+			cart: []
 		}
 	},
 
@@ -263,13 +271,117 @@ export default {
 		window.addEventListener('touchmove', onMouseMove, false);
 		window.addEventListener('mouseup', onMouseUp, false);
 		window.addEventListener('touchend', onMouseUp, false);
+
+		this.updateCart();
+		this.$bus.$on('update-cart', () => { this.updateCart(); });
 	},
 
 	methods: {
+		...mapActions(['getTempProduct']),
+
 		isCartShown() {
 			if (process.browser && window && window.innerWidth <= 890 && this.cartShown)
 				return true;
 			return false;
+		},
+ 
+		updateCart() {
+			this.cart = [];
+			// filling the cart
+			let cart = this.$cookies.get('cart');
+			if (cart && cart.forEach) {
+				console.log(cart);
+				cart.forEach(async index => {
+					let order = this.$cookies.get(`orders[${index}]`);
+					console.log(order);
+					if (order) {
+						let product = await this.getTempProduct(order.productId);
+						console.log(product);
+						if (product) {
+							this.cart.push({
+								pic: product.images && JSON.parse(product.images)[0] ? `${this.$specImgUrl}${JSON.parse(product.images)[0].url}` : '',
+								color: order.color,
+								colors: product.color ? this.getColors(product.color) : [...order.color],
+								price: product.price,
+								amount: order.amount,
+								title: product.title[this.$i18n.locale],
+								index
+							});
+						}
+					}
+				});
+			}
+		},
+
+    getColors(colors) {
+      if (colors.includes(', '))
+        return colors.split(', ');
+      else if (colors.includes(' '))
+        return colors.split(' ');
+      return colors.split();
+    },
+
+		removeOrder(index) {
+			// remove from the cart cookie
+			let cart = this.$cookies.get('cart');
+			if (cart) {
+				let indexInCartCookie = cart.indexOf(index);
+				if (indexInCartCookie != -1) {
+					cart.splice(indexInCartCookie, 1);
+					// remove the old cookie
+					this.$cookies.set('cart', {}, {
+						maxAge: 0 // six month
+					});
+					// set the new cookie
+					this.$cookies.set('cart', cart, {
+						maxAge: 60 * 60 * 24 * 30 * 6 // six month
+					});
+				}
+			}
+
+			// remove the order cookie
+			let order = this.$cookies.get(`orders[${index}]`);
+			if (order != undefined) {
+				this.$cookies.set(`orders[${index}]`, {}, {
+					maxAge: 0
+				});
+			}
+
+			// remove from the cart
+			let indexInCart = this.cart.findIndex(order => order.index == index);
+			if (indexInCart != undefined)
+				this.cart.splice(indexInCart, 1);
+		},
+
+		increaseAmount(index, value) {
+			if (value < 101)
+				this.setAmount(index, value+1);
+		},
+
+		decreaseAmount(index, value) {
+			if (value > 1)
+				this.setAmount(index, value-1);
+		},
+
+		setAmount(index, value) {
+			// update in the cart
+			let indexInCart = this.cart.findIndex(order => order.index == index);
+			if (indexInCart != undefined) {
+				this.cart[indexInCart].amount = value;
+				this.cart.push({});
+				this.cart.pop();
+			}
+
+			// update in the order cookie
+			let order = this.$cookies.get(`orders[${index}]`);
+			if (order != undefined) {
+				this.$cookies.set(`orders[${index}]`, this.cart[indexInCart], {
+					maxAge: 60 * 60 * 24 * 30 * 6 // six month
+				});
+			} else {
+				// remove the item from the cart
+				this.removeOrder(index);
+			}
 		},
 
 		search() {
@@ -303,20 +415,6 @@ export default {
 						this.cartOuterShown = false;
 				}, 300);
 			}
-		},
-
-		increaseAmount(i) {
-			this.setAmount(i, this.cartItemAmounts[i]+1);
-		},
-
-		decreaseAmount(i) {
-			this.setAmount(i, this.cartItemAmounts[i]-1);
-		},
-
-		setAmount(i, value) {
-			this.cartItemAmounts[i] = value;
-			this.cartItemAmounts.push({});
-			this.cartItemAmounts.pop();
 		},
 
 		chooseLang(lang) {

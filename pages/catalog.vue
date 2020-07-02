@@ -389,7 +389,10 @@ export default {
         this.windowSize = window.innerWidth;
 
         if (window.innerWidth > 650) {
-          this.showMobileFilters();
+          this.mobileFiltersShown = true;
+          let filters = this.$el.querySelector('.catalog-page__filter__inner');
+          if (filters)
+            filters.style.height = '';
         } else {
           this.hideMobileFilters();
         }

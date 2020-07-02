@@ -24,6 +24,7 @@
 		padding: 30px 90px;
 		border-radius: 0 90px 0 90px;
 		max-width: 56%;
+		color: white;
 
 		h1 {
 			font-weight: bold;
@@ -174,7 +175,6 @@
 			line-height: 33px;
 			display: flex;
 			align-items: center;
-			margin-bottom: 30px;
 			width: 100%;
 			font-family: Roboto, sans;
 
@@ -186,6 +186,31 @@
 		textarea {
 			resize: none;
 			height: 90px;
+		}
+
+		&__item {
+			position: relative;
+			margin-bottom: 30px;
+
+			&--no-margin-bottom {
+				margin-bottom: 0 !important;
+			}
+
+			&__message {
+				position: absolute;
+				font-size: 14px;
+				bottom: -20px;
+				left: 0;
+				margin-left: 5px;
+
+				&--error {
+					color: $color-red;
+				}
+
+				&--success {
+					color: $color-green;
+				}
+			}
 		}
 
 		&__colors {
@@ -210,7 +235,7 @@
 			justify-content: center;
 
 			button {
-				padding: 3px 50px;
+				padding: 3px 45px;
 				font-weight: 600;
 				font-size: 20px;
 				line-height: 33px;
@@ -628,12 +653,11 @@
 				border-right: 0;
 				border-radius: 0;
 				width: 100vw;
-				margin-left: -20px;
-				margin-right: -20px;
 			}
 
-			input, textarea {
-				margin-bottom: 20px;
+			&__item {
+				margin-left: -20px;
+				margin-right: -20px;
 			}
 
 			&__title {
@@ -643,7 +667,9 @@
 
 			&__colors {
 				padding-left: 0;
-				margin-bottom: 20px;
+				margin-bottom: 0;
+				padding-left: 20px;
+				padding-right: 20px;
 			}
 
 			&__top {

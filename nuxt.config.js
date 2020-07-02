@@ -80,7 +80,8 @@ export default {
         '@nuxtjs/toast',
         '@nuxtjs/google-analytics',
         '@nuxtjs/sitemap',
-        '@nuxtjs/robots'
+        '@nuxtjs/robots',
+        'cookie-universal-nuxt'
     ],
     googleAnalytics: {
         id: "UA-169616881-1"

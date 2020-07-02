@@ -29,7 +29,7 @@ export const mutations = {
     SET_PRODUCT: (state, payload) => state.product = payload,
     SET_CATS: (state, payload) => state.categories = payload,
     SET_CATS_PRODUCT: (state, payload) => state.catsProducts = payload,
-    SET_CONTACT_DATA: (state, payload) => state.contacts = payload,
+    SET_CONTACT_DATA: (state, payload) => state.contacts = payload
 }
 
 export const actions = {
@@ -69,6 +69,15 @@ export const actions = {
     async getProduct({commit},link) {
         const data = await apiRequest.get(`product/${link}`)
         commit('SET_PRODUCT', data.data.news)
+    },
+    async getTempProduct({commit}, slug) {
+        const data = await apiRequest.get(`product/${slug}`);
+        if (data && data.data && data.data.news) {
+            return data.data.news;
+        } else {
+            console.error(`Product with link ${slug} doesn't exist`);
+            return null;
+        }
     },
     async getCatsProducts({commit},id) {
         const data = await apiRequest.get(`products?cat=${id}&lang=en`)

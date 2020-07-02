@@ -34,11 +34,11 @@
 		      </div>
 		    </div>
 	    </div>
-	    <button class="index-page__product-slider__arrow-left" @click="mySwiper.slidePrev()">
+	    <button class="index-page__product-slider__arrow-left product-slider-arrow-left">
 	      <img class="half" src="~/static/pics/svg/index/slider-arrow-right.svg" alt="Go left">
 	      <img class="full" src="~/static/pics/svg/slider-round-arrow-right.svg" alt="Go left">
 	    </button>
-	    <button class="index-page__product-slider__arrow-right" @click="mySwiper.slideNext()">
+	    <button class="index-page__product-slider__arrow-right product-slider-arrow-right">
 	      <img class="half" src="~/static/pics/svg/index/slider-arrow-right.svg" alt="Go right">
 	      <img class="full" src="~/static/pics/svg/slider-round-arrow-right.svg" alt="Go right">
 	    </button>
@@ -59,6 +59,10 @@ export default {
 		observer: true,
 		observeParents: true,
 		centeredSlides: true,
+		navigation: {
+			nextEl: '.product-slider-arrow-right',
+			prevEl: '.product-slider-arrow-left'
+		},
 
 		breakpoints: {
 			1151: {

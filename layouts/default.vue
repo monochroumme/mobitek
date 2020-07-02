@@ -1,7 +1,7 @@
 <template>
   <div>
     <Preloader />
-    <Header :cart="cart" />
+    <Header />
     <nuxt />
     <Footer />
     <GoToTop />
@@ -37,38 +37,6 @@ export default {
         if (e && e.click)
           e.click();
       }
-    }
-  },
-
-  data() {
-    return {
-      cart: [
-        {
-          pic: '/pics/img/product.png',
-          title: 'Anker PowerWave Pad & Stand 7.5W',
-          price: 49
-        },
-        {
-          pic: '/pics/img/product.png',
-          title: 'Anker PowerWave Pad & Stand 7.5W',
-          price: 49
-        },
-        {
-          pic: '/pics/img/product.png',
-          title: 'Anker PowerWave Pad & Stand 7.5W',
-          price: 49
-        },
-        {
-          pic: '/pics/img/product.png',
-          title: 'Anker PowerWave Pad & Stand 7.5W',
-          price: 49
-        },
-        {
-          pic: '/pics/img/product.png',
-          title: 'Anker PowerWave Pad & Stand 7.5W',
-          price: 49
-        }
-      ]
     }
   },
 
