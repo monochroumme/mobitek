@@ -2,6 +2,9 @@
 
 > Mobitek.az on Nuxt.js
 
+https://mobitek.herokuapp.com/
+http://mobitek.az/
+
 ## Build Setup
 
 ```bash
