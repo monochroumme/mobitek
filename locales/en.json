@@ -100,7 +100,21 @@
 		"enter-address": "Enter Your Address",
 		"add-to-cart": "ADD TO CART",
 		"buy-now": "BUY NOW",
-		"also-buy": "You can also buy"
+		"also-buy": "You can also buy",
+
+		"error": {
+			"fill-name": "Please, enter your name",
+			"fill-surname": "Please, enter your surname",
+			"fill-phone": "Please, enter your phone number",
+			"fill-email": "Please, enter your email",
+			"fill-address": "Please, enter your address",
+			"choose-color": "Please, choose a color"
+		},
+
+		"success": {
+			"add-to-cart": "Added to the cart!",
+			"buy": "Ordered!"
+		}
 	},
 
 	"MetaTitle": "Mobitek.az | Accessories & Gadgets",

@@ -57,38 +57,86 @@
           <div class="product-page__input-area__top">
             <div class="product-page__input-area__col">
               <h2 class="product-page__input-area__title">{{ $t('product.fast-order') }}</h2>
-              <input type="text" name="name" maxlength="100" :placeholder="$t('product.enter-name')" v-model="name">
-              <input type="text" name="phone" maxlength="100" :placeholder="$t('product.enter-phone')" v-model="phone">
+              <div class="product-page__input-area__item">
+                <input type="text" name="firstname" maxlength="100" :placeholder="$t('product.enter-name')" v-model="name">
+                <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorName">{{ $t('product.error.fill-name') }}</span>
+              </div>
+              <div class="product-page__input-area__item">
+                <input type="text" name="phone" maxlength="100" :placeholder="$t('product.enter-phone')" v-model="phone">
+                <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorPhone">{{ $t('product.error.fill-phone') }}</span>
+              </div>
             </div>
             <div class="product-page__input-area__col">
-              <div class="product-page__input-area__colors">
-                <ColorChooser :colors="product.color.split(' ')" :chosen="chosenColor" :radio="true" @toggleColor="toggleColor($event)" />
+              <div class="product-page__input-area__item">
+                <div class="product-page__input-area__colors">
+                  <ColorChooser :colors="getColors(product.color)" :chosen="chosenColor" :radio="true" @toggleColor="toggleColor($event)" />
+                  <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorColor">{{ $t('product.error.choose-color') }}</span>
+                </div>
               </div>
-              <input type="text" name="surname" maxlength="100" :placeholder="$t('product.enter-surname')" v-model="surname">
-              <input type="email" name="email" maxlength="320" :placeholder="$t('product.enter-email')" v-model="email">
+              <div class="product-page__input-area__item">
+                <input type="text" name="surname" maxlength="100" :placeholder="$t('product.enter-surname')" v-model="surname">
+                <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorSurname">{{ $t('product.error.fill-surname') }}</span>
+              </div>
+              <div class="product-page__input-area__item">
+                <input type="email" name="email" maxlength="320" :placeholder="$t('product.enter-email')" v-model="email">
+                <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorEmail">{{ $t('product.error.fill-email') }}</span>
+              </div>
             </div>
           </div>
-          <textarea :placeholder="$t('product.enter-address')" maxlength="500" v-model="address"></textarea>
+          <div class="product-page__input-area__item">
+            <textarea :placeholder="$t('product.enter-address')" maxlength="500" v-model="address"></textarea>
+            <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorAddress">{{ $t('product.error.fill-address') }}</span>
+          </div>
           <div class="product-page__input-area__bottom">
-            <button class="add" @click="toCart()">{{ $t('product.add-to-cart') }}</button>
-            <button class="buy" @click="buy()">{{ $t('product.buy-now') }}</button>
+            <div class="product-page__input-area__item product-page__input-area__item--no-margin-bottom">
+              <button class="add" @click="toCart()">{{ $t('product.add-to-cart') }}</button>
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--success" v-show="successCart">{{ $t('product.success.add-to-cart') }}</span>
+            </div>
+            <div class="product-page__input-area__item product-page__input-area__item--no-margin-bottom">
+              <button class="buy" @click="buy()">{{ $t('product.buy-now') }}</button>
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--success" v-show="successBuy">{{ $t('product.success.buy') }}</span>
+            </div>
           </div>
         </div>
         <div class="product-page__input-area mobile">
           <div class="product-page__input-area__top">
             <h2 class="product-page__input-area__title">{{ $t('product.fast-order') }}</h2>
-            <div class="product-page__input-area__colors">
-              <ColorChooser :colors="product.color.split(' ')" :chosen="chosenColor" :radio="true" @toggleColor="toggleColor($event)" />
+            <div class="product-page__input-area__item">
+              <div class="product-page__input-area__colors">
+                <ColorChooser :colors="getColors(product.color)" :chosen="chosenColor" :radio="true" @toggleColor="toggleColor($event)" />
+                <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorColor">{{ $t('product.error.choose-color') }}</span>
+              </div>
             </div>
-            <input type="text" name="name" maxlength="100" :placeholder="$t('product.enter-name')" v-model="name">
-            <input type="text" name="surname" maxlength="100" :placeholder="$t('product.enter-surname')" v-model="surname">
-            <input type="text" name="phone" maxlength="100" :placeholder="$t('product.enter-phone')" v-model="phone">
-            <input type="email" name="email" maxlength="320" :placeholder="$t('product.enter-email')" v-model="email">
+            <div class="product-page__input-area__item">
+              <input type="text" name="firstname" maxlength="100" :placeholder="$t('product.enter-name')" v-model="name">
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorName">{{ $t('product.error.fill-name') }}</span>
+            </div>
+            <div class="product-page__input-area__item">
+              <input type="text" name="surname" maxlength="100" :placeholder="$t('product.enter-surname')" v-model="surname">
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorSurname">{{ $t('product.error.fill-surname') }}</span>
+            </div>
+            <div class="product-page__input-area__item">
+              <input type="text" name="phone" maxlength="100" :placeholder="$t('product.enter-phone')" v-model="phone">
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorPhone">{{ $t('product.error.fill-phone') }}</span>
+            </div>
+            <div class="product-page__input-area__item">
+              <input type="email" name="email" maxlength="320" :placeholder="$t('product.enter-email')" v-model="email">
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorEmail">{{ $t('product.error.fill-email') }}</span>
+            </div>
           </div>
-          <textarea :placeholder="$t('product.enter-address')" maxlength="500" v-model="address"></textarea>
+          <div class="product-page__input-area__item">
+            <textarea :placeholder="$t('product.enter-address')" maxlength="500" v-model="address"></textarea>
+            <span class="product-page__input-area__item__message product-page__input-area__item__message--error" v-show="errorAddress">{{ $t('product.error.fill-address') }}</span>
+          </div>
           <div class="product-page__input-area__bottom">
-            <button class="add" @click="toCart()">{{ $t('product.add-to-cart') }}</button>
-            <button class="buy" @click="buy()">{{ $t('product.buy-now') }}</button>
+            <div class="product-page__input-area__item product-page__input-area__item--no-margin-bottom">
+              <button class="add" @click="toCart()">{{ $t('product.add-to-cart') }}</button>
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--success" v-show="successCart">{{ $t('product.success.add-to-cart') }}</span>
+            </div>
+            <div class="product-page__input-area__item product-page__input-area__item--no-margin-bottom">
+              <button class="buy" @click="buy()">{{ $t('product.buy-now') }}</button>
+              <span class="product-page__input-area__item__message product-page__input-area__item__message--success" v-show="successBuy">{{ $t('product.success.buy') }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -113,10 +161,19 @@ export default {
     'vue-magnifier': vueMagnifier
   },
 
-  async fetch({ store, route }) {
+  async fetch({ store, route, redirect }) {
     await store.dispatch('getCategories');
     await store.dispatch('getProduct', route.params.id).then(async () => {
-      await store.dispatch('getCatsProducts', store.state.product.cat_id)
+      if (!store.state.product || !store.state.product.cat_id) {
+        if (route.path.startsWith('/ru/'))
+          redirect('/ru/catalog');
+        else if (route.path.startsWith('/az/'))
+          redirect('/az/catalog');
+        else
+          redirect('/catalog');
+      }
+      else
+        await store.dispatch('getCatsProducts', store.state.product.cat_id)
     });
   },
 
@@ -163,18 +220,75 @@ export default {
   methods: {
     ...mapActions(['buyNow', 'addToCart']),
 
+    getColors(colors) {
+      if (colors.includes(', '))
+        return colors.split(', ');
+      else if (colors.includes(' '))
+        return colors.split(' ');
+      return colors.split();
+    },
+
+    formCheckers() {
+      let proceed = true;
+
+      if (this.name.trim() == '') {
+        proceed = false;
+        this.errorName = true;
+      } else {
+        this.errorName = false;
+      }
+      if (this.surname.trim() == '') {
+        proceed = false;
+        this.errorSurname = true;
+      } else {
+        this.errorSurname = false;
+      }
+      if (this.phone.trim() == '') {
+        proceed = false;
+        this.errorPhone = true;
+      } else {
+        this.errorPhone = false;
+      }
+      if (this.email.trim() == '') {
+        proceed = false;
+        this.errorEmail = true;
+      } else {
+        this.errorEmail = false;
+      }
+      if (this.address.trim() == '') {
+        proceed = false;
+        this.errorAddress = true;
+      } else {
+        this.errorAddress = false;
+      }
+      if (this.colors.length > 1 && this.chosenColor == '') {
+        proceed = false;
+        this.errorColor = true;
+      } else {
+        this.errorColor = false;
+      }
+
+      if (this.colors.length == 1) {
+        this.chosenColor = this.colors[0].color;
+      }
+
+      return proceed;
+    },
+
     buy() {
-      if (this.name !== '' && this.surname !== '' && this.phone !== '' && this.email !== '' && this.address !== '') {
+      this.successBuy = false;
+
+      if (this.formCheckers()) {
         this.buyNow({
-          name: this.name,
-          surname: this.surname,
-          phone: this.phone,
-          email: this.email,
-          address: this.address,
+          name: this.name.trim(),
+          surname: this.surname.trim(),
+          phone: this.phone.trim(),
+          email: this.email.trim(),
+          address: this.address.trim(),
           color: this.chosenColor,
           productId: this.$route.params.id
         }).then(() => {
-          this.$toast.success(this.$t('validate.success'));
+          this.successBuy = true;
           this.name = ''
           this.surname = ''
           this.phone = ''
@@ -182,25 +296,46 @@ export default {
           this.address = ''
           this.chosenColor = ''
         });
-      } else if (this.chosenColor === '') {
-        this.$toast.error(this.$t('validate.chosenColor'))
-      } else {
-        this.$toast.error(this.$t('validate.notAll'))
       }
     },
 
     toCart() {
-      if (this.name !== '' && this.surname !== '' && this.phone !== '' && this.email !== '' && this.address !== '') {
-        this.addToCart({
-          name: this.name,
-          surname: this.surname,
-          phone: this.phone,
-          email: this.email,
-          address: this.address,
-          color: this.chosenColor
+      this.successCart = false;
+
+      if (this.formCheckers()) {
+        this.successCart = true;
+        // add to cookies
+        // adding the index of a new order to the cart in the cookies
+        let orders = this.$cookies.get('cart'),
+            orderIndex = 1;
+
+        if (!orders || orders.length == 0)
+          orders = [];
+        else
+          orderIndex = orders[orders.length-1]+1;
+
+        orders.push(orderIndex);
+
+        let order = {
+          name: this.name.trim(),
+          surname: this.surname.trim(),
+          phone: this.phone.trim(),
+          email: this.email.trim(),
+          address: this.address.trim(),
+          color: this.chosenColor,
+          productId: this.product.slug,
+          amount: 1,
+          index: orderIndex
+        };
+
+        this.$cookies.set('cart', orders, {
+          maxAge: 60 * 60 * 24 * 30 * 6 // six month
         });
-      } else {
-        this.$toast.error('Мейл не может быть пустым')
+        this.$cookies.set(`orders[${orderIndex}]`, order, {
+          maxAge: 60 * 60 * 24 * 30 * 6 // six month
+        });
+
+        this.$bus.$emit('update-cart');
       }
     },
 
@@ -238,6 +373,15 @@ export default {
 
       colors: [],
       activeSlide: 0,
+
+      errorColor: false,
+      errorName: false,
+      errorSurname: false,
+      errorPhone: false,
+      errorEmail: false,
+      errorAddress: false,
+      successCart: false,
+      successBuy: false,
 
       leftSwiperOption: {
         slidesPerView: 4,
