@@ -28,15 +28,10 @@
 			z-index: 2;
 			width: 100%;
 			max-width: 100%;
-			overflow-x: auto;
-			scrollbar-width: none; /* Firefox */
-			scrollbar-height: none; /* Firefox */
-			-ms-overflow-style: none;  /* IE 10+ */
 
-			&::-webkit-scrollbar {
-				width: 0;
-				height: 0;
-				background: transparent; /* make scrollbar transparent */
+			.swiper-wrapper {
+				justify-content: center;
+				align-items: flex-end;
 			}
 
 			&__item {
@@ -52,7 +47,6 @@
 				background: rgba(51, 51, 51, 0.65);
 				@include flex-center;
 				text-align: center;
-				margin-right: 10px;
 				cursor: pointer;
 				transition: height .2s ease;
 
@@ -688,15 +682,13 @@
 				width: fit-content;
 				left: 50%;
 				transform: translateX(-50%);
+				
+				.swiper-wrapper {
+					justify-content: flex-start;
+				}
 
 				&__item {
 					width: unset;
-
-					&--empty {
-						max-width: 20px;
-						min-width: 20px;
-						height: 1px;
-					}
 				}
 			}
 		}
@@ -857,21 +849,6 @@
 
 @media (max-width: 600px) {
 	.index-page {
-		&__welcome {
-			&__bottom {
-				&__item {
-					width: 100vw;
-					max-width: 100vw;
-					min-width: 100vw;
-					margin-right: 0;
-
-					&--empty {
-						display: none;
-					}
-				}
-			}
-		}
-
 		&__product-showcase {
 			&__card {
 				&__item {
@@ -915,6 +892,9 @@
 
 			&__bottom {
 				&__item {
+					max-width: 100vw;
+					min-width: 100vw;
+					margin-right: 0;
 					width: 100%;
 					padding: 5px 20px;
 					height: unset;

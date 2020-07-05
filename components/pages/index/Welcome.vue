@@ -8,11 +8,13 @@
       </div>
     </div>
     <div class="index-page__welcome__bottom">
-      <div class="index-page__welcome__bottom__item--empty"></div>
-      <div class="index-page__welcome__bottom__item" v-for="(item, i) in data" :key="i" :class="{ active: activeIndex == i }" @click="mySwiper.slideTo(i)">
-        <span>{{ item.title[$i18n.locale] }}</span>
+      <div v-swiper:titleSwiper="titleSwiperOption">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide index-page__welcome__bottom__item" v-for="(item, i) in data" :key="i" :class="{ active: activeIndex == i }" @click="mySwiper.slideTo(i)">
+            <span>{{ item.title[$i18n.locale] }}</span>
+          </div>
+        </div>
       </div>
-      <div class="index-page__welcome__bottom__item--empty"></div>
     </div>
   </div>
 </template>
@@ -28,6 +30,18 @@ export default {
         autoplay: true,
         init: false
       },
+      titleSwiperOption: {
+        init: false,
+        slidesPerView: 1,
+        spaceBetween: 0,
+
+        breakpoints: {
+          501: {
+            slidesPerView: 'auto',
+            spaceBetween: 10
+          }
+        }
+      },
       activeIndex: 0
     }
   },
@@ -37,55 +51,18 @@ export default {
 
     this.mySwiper.on('slideChange', () => {
       this.activeIndex = this.mySwiper.activeIndex;
+      this.titleSwiper.slideTo(this.activeIndex);
+    });
 
-      // bottom items scroll when a small screen
-      if (window.innerWidth > 600) {
-        bottom.scrollTo({
-          left: bottom.scrollLeft + this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().x - this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().width/3,
-          behavior: 'smooth'
-        });
-      } else {
-        bottom.scrollTo({
-          left: bottom.scrollLeft + this.mySwiper.slides[this.mySwiper.activeIndex].getBoundingClientRect().x,
-          behavior: 'smooth'
-        });
+    this.titleSwiper.on('slideChange', () => {
+      if (window.innerWidth <= 500) {
+        if (this.activeIndex != this.titleSwiper.activeIndex)
+          this.mySwiper.slideTo(this.titleSwiper.activeIndex);
       }
     });
 
     this.mySwiper.init();
-
-    if (!this.$bus.isMobile) {
-      const items = document.querySelectorAll('.index-page__welcome__bottom');
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-
-      function dragOnElem(elems) {
-        elems.forEach(el => {
-          el.addEventListener('mousedown', (e) => {
-          	e.preventDefault();
-            isDown = true;
-            startX = e.pageX - el.offsetLeft;
-            scrollLeft = el.scrollLeft;
-          });
-          el.addEventListener('mouseleave', () => {
-            isDown = false;
-          });
-          el.addEventListener('mouseup', () => {
-            isDown = false;
-          });
-          el.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - el.offsetLeft;
-            const walk = (x - startX); //scroll-fast
-            el.scrollLeft = scrollLeft - walk;
-          });
-        });
-      }
-
-      dragOnElem(items);
-    }
+    this.titleSwiper.init();
   }
 }
 </script>
