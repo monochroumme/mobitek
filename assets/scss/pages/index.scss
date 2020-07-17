@@ -29,6 +29,10 @@
 			width: 100%;
 			max-width: 100%;
 
+			.swiper-container {
+				overflow: visible;
+			}
+
 			.swiper-wrapper {
 				justify-content: center;
 				align-items: flex-end;
@@ -36,7 +40,6 @@
 
 			&__item {
 				white-space: nowrap;
-				width: 24%;
 				height: 43px;
 				min-width: fit-content;
 				padding: 0 24px;
@@ -685,10 +688,6 @@
 				
 				.swiper-wrapper {
 					justify-content: flex-start;
-				}
-
-				&__item {
-					width: unset;
 				}
 			}
 		}
