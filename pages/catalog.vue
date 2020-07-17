@@ -355,6 +355,8 @@ export default {
       if (this.$i18n)
         query.lang = this.$i18n.locale;
       query.per_page = this.perPage;
+      if (query.max_price == 'inf')
+        query.max_price = 10000;
 
       return query;
     },
