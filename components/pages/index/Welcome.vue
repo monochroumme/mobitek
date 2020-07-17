@@ -26,7 +26,6 @@ export default {
   data() {
     return {
       swiperOption: {
-        allowTouchMove: false,
         autoplay: true,
         init: false
       },
@@ -63,6 +62,41 @@ export default {
 
     this.mySwiper.init();
     this.titleSwiper.init();
+
+    window.addEventListener('resize', this.onResize, false);
+    this.onResize();
+  },
+
+  methods: {
+    onResize() {
+      if (!document.querySelector('.index-page')) {
+        window.removeEventListener('resize', this.onResize, false);
+        return;
+      }
+
+      let titleSlides = this.$el.querySelectorAll('.index-page__welcome__bottom__item'),
+          maxWidth = 0, curWidth;
+
+      if (titleSlides && titleSlides.forEach) {
+        if (window.innerWidth > 500) {
+          // getting the biggest slide by its width
+          titleSlides.forEach(item => {
+            curWidth = item.querySelector('span').offsetWidth;
+            if (curWidth > maxWidth)
+              maxWidth = curWidth; 
+          });
+
+          titleSlides.forEach(item => {
+            item.style.width = '100%';
+            item.style.maxWidth = maxWidth + 24 * 2 + 'px';
+          });
+        } else {
+          titleSlides.forEach(item => {
+            item.style.maxWidth = '';
+          });
+        }
+      }
+    }
   }
 }
 </script>
