@@ -26,10 +26,7 @@ export default {
     $route(n, o) {
       if (this.$route.path.toLowerCase() == '/about' || this.$route.path.toLowerCase() == `/${this.$i18n.locale}/about`)
         document.body.style.background = 'white';
-      else if (this.$route.path.toLowerCase() == '/catalog' || this.$route.path.toLowerCase() == `/${this.$i18n.locale}/catalog`)
-        document.body.style.overflow = 'visible';
       else {
-        document.body.style.overflow = '';
         document.body.style.background = '';
       }
       if (n.path.toLowerCase() != o.path.toLowerCase()) {

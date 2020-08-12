@@ -29,6 +29,12 @@
 			width: 100%;
 			max-width: 100%;
 
+			.swiper-container {
+				overflow: visible;
+				max-width: 100%;
+				width: 100%;
+			}
+
 			.swiper-wrapper {
 				justify-content: center;
 				align-items: flex-end;
@@ -36,7 +42,6 @@
 
 			&__item {
 				white-space: nowrap;
-				width: 24%;
 				height: 43px;
 				min-width: fit-content;
 				padding: 0 24px;
@@ -51,7 +56,7 @@
 				transition: height .2s ease;
 
 				&:last-of-type {
-					margin-right: 0;
+					margin-right: 0 !important;
 				}
 
 				&.active, &:hover {
@@ -200,6 +205,7 @@
 			background: white;
 			position: relative;
 			cursor: pointer;
+			width: 100%;
     	max-width: 300px;
 			transition: box-shadow .2s ease;
 
@@ -210,7 +216,7 @@
 			&__inner {
 				display: flex;
 				flex-direction: column;
-				height: 100%;
+				height: 407px;
 				padding: 15px;
 
 				.price {
@@ -247,6 +253,9 @@
 			}
 
 			.info {
+				max-height: 109px;
+				height: 100%;
+				overflow: hidden;
 				margin-bottom: 10px;
 
 				.top {
@@ -285,6 +294,11 @@
 					font-size: 13px;
 					line-height: 22px;
 					color: #6C6B6B;
+					word-break: break-word;
+		      display: -webkit-box;
+		      -webkit-line-clamp: 2;
+		      -webkit-box-orient: vertical; 
+		      overflow: hidden;
 				}
 			}
 		}
@@ -685,10 +699,6 @@
 				
 				.swiper-wrapper {
 					justify-content: flex-start;
-				}
-
-				&__item {
-					width: unset;
 				}
 			}
 		}

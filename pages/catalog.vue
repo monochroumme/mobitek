@@ -278,6 +278,9 @@ export default {
       if (this.$route.query.title)
         this.searchInput = this.$route.query.title;
 
+      if (this.$route.query.type)
+        this.type = this.$route.query.type;
+
       if (this.$route.query.min_price) {
         this.minPrice = this.$route.query.min_price;
       }
@@ -355,6 +358,8 @@ export default {
       if (this.$i18n)
         query.lang = this.$i18n.locale;
       query.per_page = this.perPage;
+      if (query.max_price == 'inf')
+        query.max_price = 10000;
 
       return query;
     },

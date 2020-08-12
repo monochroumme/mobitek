@@ -28,9 +28,9 @@
 									<div class="header__langs__outer" v-show="langsOuterShown">
 										<div class="header__langs__inner" :class="{active: langsShown}">
 											<div class="header__langs__wrapper">
-												<button class="header__langs__item" @click="chooseLang('ru')">RU</button>
-												<button class="header__langs__item" @click="chooseLang('az')">AZ</button>
-												<button class="header__langs__item" @click="chooseLang('en')">EN</button>
+												<button class="header__langs__item" @click="chooseLang('ru')" :class="{active: activeLang == 'ru'}">RU</button>
+												<button class="header__langs__item" @click="chooseLang('az')" :class="{active: activeLang == 'az'}">AZ</button>
+												<button class="header__langs__item" @click="chooseLang('en')" :class="{active: activeLang == 'en'}">EN</button>
 											</div>
 										</div>
 									</div>
@@ -136,6 +136,9 @@
 									<button class="header__cart__order" v-if="cart.length > 0">
 										<span>{{ $t('cart.order') }}</span>
 									</button>
+									<span class="header__cart__empty" v-if="cart.length == 0">
+										{{ $t('cart.empty') }}
+									</span>
 								</div>
 							</div>
 							<div class="header__cart__outer__bg" @click="toggleCart()"></div>
@@ -148,9 +151,9 @@
 						<div class="header__langs__outer" v-show="langsOuterShown">
 							<div class="header__langs__inner" :class="{active: langsShown}">
 								<div class="header__langs__wrapper">
-									<button class="header__langs__item" @click="chooseLang('ru')">RU</button>
-									<button class="header__langs__item" @click="chooseLang('az')">AZ</button>
-									<button class="header__langs__item" @click="chooseLang('en')">EN</button>
+									<button class="header__langs__item" @click="chooseLang('ru')" :class="{active: activeLang == 'ru'}">RU</button>
+									<button class="header__langs__item" @click="chooseLang('az')" :class="{active: activeLang == 'az'}">AZ</button>
+									<button class="header__langs__item" @click="chooseLang('en')" :class="{active: activeLang == 'en'}">EN</button>
 								</div>
 							</div>
 						</div>
@@ -276,6 +279,14 @@ export default {
 		this.$bus.$on('update-cart', () => { this.updateCart(); });
 	},
 
+	computed: {
+		activeLang() {
+			if (this.$i18n)
+				return this.$i18n.locale;
+			return '';
+		}
+	},
+
 	methods: {
 		...mapActions(['getTempProduct']),
 
@@ -290,13 +301,10 @@ export default {
 			// filling the cart
 			let cart = this.$cookies.get('cart');
 			if (cart && cart.forEach) {
-				console.log(cart);
 				cart.forEach(async index => {
 					let order = this.$cookies.get(`orders[${index}]`);
-					console.log(order);
 					if (order) {
 						let product = await this.getTempProduct(order.productId);
-						console.log(product);
 						if (product) {
 							this.cart.push({
 								pic: product.images && JSON.parse(product.images)[0] ? `${this.$specImgUrl}${JSON.parse(product.images)[0].url}` : '',

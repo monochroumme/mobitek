@@ -649,15 +649,13 @@
 			input, textarea, button {
 				font-size: 20px;
 				line-height: 33px;
-				border-left: 0;
-				border-right: 0;
-				border-radius: 0;
-				width: 100vw;
+				width: 100%;
 			}
 
-			&__item {
-				margin-left: -20px;
-				margin-right: -20px;
+			&__item--no-margin-bottom {
+				&:first-of-type {
+					margin-bottom: 10px !important;
+				}
 			}
 
 			&__title {
@@ -718,6 +716,29 @@
 			&__title {
 				font-size: 24px;
 				line-height: 33px;
+			}
+		}
+	}
+}
+
+@media (max-width: 340px) {
+	.product-page {
+		&__input-area {
+			input, textarea, button {
+				border-left: none;
+				border-right: none;
+				border-radius: 0;
+			}
+
+			&__item {
+				margin-left: -20px;
+				margin-right: -20px;
+
+				&--no-margin-bottom {
+					&:first-of-type {
+						margin-bottom: 0 !important;
+					}
+				}
 			}
 		}
 	}

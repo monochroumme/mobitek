@@ -30,7 +30,6 @@
               <img src="/pics/svg/about/certificate-triangle.svg">
             </div>
           </div>
-          <button class="about-page__certificates__show"><span>{{ $t('about.show') }}</span></button>
         </div>
       </div>
     </div>

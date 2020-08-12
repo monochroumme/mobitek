@@ -5,6 +5,7 @@
     "about": "Haqqımızda",
     "contacts": "Əlaqə"
   },
+
   "footer": {
     "home": "Əsas",
     "information": "İnformasiya",
@@ -27,6 +28,7 @@
       "send": "Göndər"
     }
   },
+
   "index": {
     "product-showcase": {
       "charger": "Şarj Cihazları",
@@ -37,9 +39,11 @@
       "home": "Ev üçün",
       "game": "Oyun"
     },
+
     "product-slider": {
       "see-more": "Daha çox"
     },
+
     "banners": {
       "how": {
         "alt": "Sürətli çatdırılma necə işləyir?",
@@ -63,6 +67,7 @@
       "instant-reply": "Sürətli Müştəri Xidməti"
     }
   },
+
   "contacts": {
     "title": "Mağazalar",
     "locations": "Xəritədə bizim mağazalar",
@@ -71,10 +76,12 @@
       "see-address": "Adresi xəritədə göstər"
     }
   },
+
   "about": {
     "title": "Haqqımızda",
     "certificates": "Sertifikatlarımız"
   },
+
   "catalog": {
     "search-for-products": "Məhsullar üzrə axtarış",
     "enter-product-name": "Məhsulun adını daxil edin",
@@ -86,6 +93,7 @@
     "price": "Qiymət",
     "empty": "Nəticə yoxdur"
   },
+
   "product": {
     "fast-order": "Sürətli sifariş",
     "properties": "Məhsulun xarasteriktikası",
@@ -98,14 +106,22 @@
     "buy-now": "İNDİ AL",
     "also-buy": "Həmçinin əldə edə bilərsiniz"
   },
-   "MetaTitle": "Mobitek.az | Aksessuarlar & Qadjetlər",
-   "metaDescription": "Biz YÜKSƏK KEYFİYYƏTDƏ və hər cibə UYĞUN QİYMƏTDƏ, dünyaca məşhur Brendlərin aksessuar və gadjetlərinin TOPDAN və PƏRAKƏNDƏ satışını həyata keçiririk!",
-   "keywords": "powerbank,gücqurğusu,adapter,şarjcihazı,simsiz,simsizcihaz,avtomobil,telefon,smartfon,gadget,ev,oyun,videooyun,tel,oyun,ps4, ps3,playstation,maşınadapteri,mawinadapteri,adapterlər,keys,ekranqoruyucular,ekranqoruyucu,kabel,kabellər,dinamik,dinamiklər, JBL,marshall,mobitek,mobitekaz,mobitekazerbaijan,mobitel,mi,powerology,mfi,apple,xiaomi,anker,ravpower,audio,qulaqlıq,qulaqcıq,qulaqlıqlar,devia,rock,joyroom,şunur,shunur,wunur,mawinucun,mashinucun,nausnik,nauwnik,naushnik",
+
+ "MetaTitle": "Mobitek.az | Aksessuarlar & Qadjetlər",
+ "metaDescription": "Biz YÜKSƏK KEYFİYYƏTDƏ və hər cibə UYĞUN QİYMƏTDƏ, dünyaca məşhur Brendlərin aksessuar və gadjetlərinin TOPDAN və PƏRAKƏNDƏ satışını həyata keçiririk!",
+ "keywords": "powerbank,gücqurğusu,adapter,şarjcihazı,simsiz,simsizcihaz,avtomobil,telefon,smartfon,gadget,ev,oyun,videooyun,tel,oyun,ps4, ps3,playstation,maşınadapteri,mawinadapteri,adapterlər,keys,ekranqoruyucular,ekranqoruyucu,kabel,kabellər,dinamik,dinamiklər, JBL,marshall,mobitek,mobitekaz,mobitekazerbaijan,mobitel,mi,powerology,mfi,apple,xiaomi,anker,ravpower,audio,qulaqlıq,qulaqcıq,qulaqlıqlar,devia,rock,joyroom,şunur,shunur,wunur,mawinucun,mashinucun,nausnik,nauwnik,naushnik",
+  
   "validate": {
     "chosenColor": "Rəng seçilməyib",
     "notAll": "Qeyd edilən bütün xanalar doldurulmayıb",
     "success": "Müraciətiniz qeyd olundu",
     "writeUs": "İzlədiyiniz üçün təşəkkürlər",
     "notWriteUs": "Mail boş ola bilməz"
+  },
+
+  "cart": {
+    "title": "Səbət",
+    "order": "Sifariş vermək",
+    "empty": "Səbət boşdur"
   }
 }

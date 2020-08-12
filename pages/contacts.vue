@@ -66,16 +66,7 @@ export default {
 
     window.initMap = () => {
       let locations = this.contacts ? [...this.contacts.map(v => [v.address, ...[parseFloat(v.lat), parseFloat(v.lng)]])] : [],
-          center = locations.length > 0 ? ([
-            locations.map(v => v[1]).reduce((a, b) => {
-            if (typeof a === 'object' || !a) a = b;
-            return a + b;
-          }) / locations.length,
-          locations.map(v => v[1]).reduce((a, b) => {
-            if (typeof a === 'object' || !a) a = b;
-            return a + b;
-          }) / locations.length
-          ]) : [0,0];
+          center = locations.length > 1 ? [locations[1][1], locations[1][2]] : [locations[0][1], locations[0][2]];
 
       this.map.gmap = new google.maps.Map(document.getElementById('map'), {
         zoom: 16,
