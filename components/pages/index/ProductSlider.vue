@@ -45,7 +45,7 @@
       </button>
     </div>
     <div class="index-page__product-slider__bottom container container--page">
-      <clink to="/catalog">
+      <clink :to="`/catalog?type=${activeCatQuery}`">
         <span>{{ $t('index.product-slider.see-more') }}</span>
       </clink>
     </div>
@@ -82,6 +82,18 @@ export default {
     });
 
     this.sectionSwiper.init(this.sectionSwiperOption);
+  },
+
+  computed: {
+    activeCatQuery() {
+      if (this.currentSlider == 0)
+        return 'top_rated';
+      else if (this.currentSlider == 1)
+        return 'best_sellers';
+      else if (this.currentSlider == 2)
+        return 'editor_choice';
+      return '';
+    }
   },
 
   methods: {

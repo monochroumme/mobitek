@@ -73,8 +73,7 @@
 
 	"about": {
 		"title": "About Us",
-		"certificates": "Our Certificates",
-		"show": "Show"
+		"certificates": "Our Certificates"
 	},
 
 	"catalog": {
@@ -131,6 +130,7 @@
 
 	"cart": {
 		"title": "Cart",
-		"order": "Order"
+		"order": "Order",
+		"empty": "The cart is empty"
 	}
 }

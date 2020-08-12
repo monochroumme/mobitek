@@ -278,6 +278,9 @@ export default {
       if (this.$route.query.title)
         this.searchInput = this.$route.query.title;
 
+      if (this.$route.query.type)
+        this.type = this.$route.query.type;
+
       if (this.$route.query.min_price) {
         this.minPrice = this.$route.query.min_price;
       }

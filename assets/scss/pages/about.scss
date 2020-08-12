@@ -239,20 +239,6 @@
 				}
 			}
 		}
-
-		&__show {
-			font-weight: 700;
-			font-size: 16px;
-			line-height: 27px;
-			text-align: center;
-			color: #333333;
-			height: 27px;
-			
-			span {
-				opacity: 0;
-				transition: opacity .2s ease;
-			}
-		}
 	}
 }
 
