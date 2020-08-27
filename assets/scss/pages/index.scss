@@ -205,7 +205,6 @@
 			background: white;
 			position: relative;
 			cursor: pointer;
-			width: 100%;
     	max-width: 300px;
 			transition: box-shadow .2s ease;
 
@@ -216,7 +215,7 @@
 			&__inner {
 				display: flex;
 				flex-direction: column;
-				height: 407px;
+				height: 100%;
 				padding: 15px;
 
 				.price {
@@ -253,9 +252,6 @@
 			}
 
 			.info {
-				max-height: 109px;
-				height: 100%;
-				overflow: hidden;
 				margin-bottom: 10px;
 
 				.top {

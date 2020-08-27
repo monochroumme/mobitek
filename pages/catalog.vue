@@ -102,7 +102,7 @@ export default {
       mobileFiltersShown: false,
 
       minPrice: 0,
-      maxPrice: 500,
+      maxPrice: 'inf',
 
       filterByPrice: 'ascending',
       filterByProductNewness: 'new',
