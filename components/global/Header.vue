@@ -133,7 +133,7 @@
 											</div>
 										</div>
 									</div>
-									<button class="header__cart__order" v-if="cart.length > 0">
+									<button class="header__cart__order" v-if="cart.length > 0" @click="onOrder()">
 										<span>{{ $t('cart.order') }}</span>
 									</button>
 									<span class="header__cart__empty" v-if="cart.length == 0">
@@ -295,6 +295,10 @@ export default {
 				return true;
 			return false;
 		},
+
+		onOrder() {
+			
+		},
  
 		updateCart() {
 			this.cart = [];
@@ -306,6 +310,7 @@ export default {
 					if (order) {
 						let product = await this.getTempProduct(order.productId);
 						if (product) {
+							console.log(product);
 							this.cart.push({
 								pic: product.images && JSON.parse(product.images)[0] ? `${this.$specImgUrl}${JSON.parse(product.images)[0].url}` : '',
 								color: order.color,
@@ -315,6 +320,9 @@ export default {
 								title: product.title[this.$i18n.locale],
 								index
 							});
+						} else {
+							// remove the item from the cookies
+							this.removeOrder(index);
 						}
 					}
 				});
