@@ -31,6 +31,8 @@
 
 			.swiper-container {
 				overflow: visible;
+				max-width: 100%;
+				width: 100%;
 			}
 
 			.swiper-wrapper {
@@ -54,7 +56,7 @@
 				transition: height .2s ease;
 
 				&:last-of-type {
-					margin-right: 0;
+					margin-right: 0 !important;
 				}
 
 				&.active, &:hover {

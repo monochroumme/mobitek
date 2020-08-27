@@ -17,7 +17,7 @@
             <div v-swiper:rightSwiper="rightSwiperOption">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(item, i) in JSON.parse(product.images)" :key="i">
-                  <vue-magnifier class="product-page__sliders__right__slide" :src="`${$specImgUrl}${item.url}`"></vue-magnifier>
+                  <zoom-on-hover class="product-page__sliders__right__slide" :img-normal="`${$specImgUrl}${item.url}`" :scale="1.5" />
                 </div>
               </div>
             </div>
@@ -151,14 +151,12 @@ import ProductSlider from '~/components/pages/product/ProductSlider';
 import ColorChooser from '~/components/global/ColorChooser';
 
 import { mapState, mapActions } from 'vuex';
-import vueMagnifier from '~/components/global/vue-magnifier';
 
 export default {
   components: {
     ProductShowcase,
     ProductSlider,
-    ColorChooser,
-    'vue-magnifier': vueMagnifier
+    ColorChooser
   },
 
   async fetch({ store, route, redirect }) {
