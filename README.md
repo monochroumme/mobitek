@@ -2,7 +2,7 @@
 
 > Mobitek.az on Nuxt.js
 
-https://mobitek.herokuapp.com/
+https://mobitek.herokuapp.com/  
 https://mobitek.az/
 
 ## Build Setup
