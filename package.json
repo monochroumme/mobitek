@@ -18,7 +18,7 @@
     "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sitemap": "^2.3.2",
     "@nuxtjs/toast": "^3.3.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "cookie-universal-nuxt": "^2.1.4",
     "lottie-web": "^5.6.10",
     "nuxt": "^2.0.0",
