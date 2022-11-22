@@ -21,7 +21,7 @@
     "axios": "^0.19.2",
     "cookie-universal-nuxt": "^2.1.4",
     "lottie-web": "^5.6.10",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "nuxt-i18n": "^6.11.1",
     "redirect-ssl": "^2.0.0",
     "swiper": "^5.3.8",
